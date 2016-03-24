@@ -119,9 +119,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
   var timeThen:  NSTimeInterval = 0
 
 
-    var cadl_timer: CADisplayLink;
-    var cadl_lastTimestamp: NSTimeInterval;
-  
+//    var cadl_timer: CADisplayLink;
+//    var cadl_lastTimestamp: NSTimeInterval;
+
   private func setDelta() {
     timeNow   = NSDate().timeIntervalSince1970
     timeDelta = timeNow - timeThen
