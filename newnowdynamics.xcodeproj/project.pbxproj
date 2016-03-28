@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F1364FD01CA9700600971D2C /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F1364FCF1CA9700500971D2C /* MarqueeLabel.m */; };
+		F1364FD31CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1364FD21CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf */; };
+		F13662E11CA71875005785A2 /* SDWTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13662E01CA71875005785A2 /* SDWTextViewController.swift */; };
+		F13662E31CA7195D005785A2 /* SDWAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13662E21CA7195D005785A2 /* SDWAboutViewController.swift */; };
+		F13662E51CA71A5E005785A2 /* SDWTextEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13662E41CA71A5E005785A2 /* SDWTextEditViewController.swift */; };
+		F13662E71CA727F5005785A2 /* SDWPagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13662E61CA727F5005785A2 /* SDWPagable.swift */; };
+		F1F508241CA4A8BE00F1189B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F508231CA4A8BE00F1189B /* AppDelegate.swift */; };
+		F1F508261CA4A8BE00F1189B /* SDWMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F508251CA4A8BE00F1189B /* SDWMainController.swift */; };
+		F1F508291CA4A8BE00F1189B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1F508271CA4A8BE00F1189B /* Main.storyboard */; };
+		F1F5082B1CA4A8BE00F1189B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1F5082A1CA4A8BE00F1189B /* Assets.xcassets */; };
+		F1F5082E1CA4A8BE00F1189B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1F5082C1CA4A8BE00F1189B /* LaunchScreen.storyboard */; };
+		F53FD1CE133FF41940CD01D8 /* libPods-newnowdynamics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C96A0DF623E2B565E8A015 /* libPods-newnowdynamics.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		65C96A0DF623E2B565E8A015 /* libPods-newnowdynamics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-newnowdynamics.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B3D2EC818FFDC985A0AC664 /* Pods-newnowdynamics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newnowdynamics.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newnowdynamics/Pods-newnowdynamics.debug.xcconfig"; sourceTree = "<group>"; };
+		F0967AA0702C9D45C3FCB888 /* Pods-newnowdynamics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newnowdynamics.release.xcconfig"; path = "Pods/Target Support Files/Pods-newnowdynamics/Pods-newnowdynamics.release.xcconfig"; sourceTree = "<group>"; };
+		F1364FCB1CA87C6700971D2C /* newnowdynamics-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "newnowdynamics-Bridging-Header.h"; sourceTree = "<group>"; };
+		F1364FCE1CA9700500971D2C /* MarqueeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeLabel.h; sourceTree = "<group>"; };
+		F1364FCF1CA9700500971D2C /* MarqueeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeLabel.m; sourceTree = "<group>"; };
+		F1364FD21CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ProximaNovaCondensedSemibold.otf; sourceTree = "<group>"; };
+		F13662E01CA71875005785A2 /* SDWTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWTextViewController.swift; sourceTree = "<group>"; };
+		F13662E21CA7195D005785A2 /* SDWAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWAboutViewController.swift; sourceTree = "<group>"; };
+		F13662E41CA71A5E005785A2 /* SDWTextEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWTextEditViewController.swift; sourceTree = "<group>"; };
+		F13662E61CA727F5005785A2 /* SDWPagable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWPagable.swift; sourceTree = "<group>"; };
+		F1F508201CA4A8BE00F1189B /* New Now.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Now.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1F508231CA4A8BE00F1189B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F1F508251CA4A8BE00F1189B /* SDWMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWMainController.swift; sourceTree = "<group>"; };
+		F1F508281CA4A8BE00F1189B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F1F5082A1CA4A8BE00F1189B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F1F5082D1CA4A8BE00F1189B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F1F5082F1CA4A8BE00F1189B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F1F5081D1CA4A8BE00F1189B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F53FD1CE133FF41940CD01D8 /* libPods-newnowdynamics.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5B31356C18DA0CD2D6A1A01D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				65C96A0DF623E2B565E8A015 /* libPods-newnowdynamics.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		689CE6B56EB4484D932FFEF0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8B3D2EC818FFDC985A0AC664 /* Pods-newnowdynamics.debug.xcconfig */,
+				F0967AA0702C9D45C3FCB888 /* Pods-newnowdynamics.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F1364FCC1CA9700500971D2C /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				F1364FCD1CA9700500971D2C /* MarqueeLabel */,
+			);
+			name = Vendor;
+			path = newnowdynamics/Vendor;
+			sourceTree = "<group>";
+		};
+		F1364FCD1CA9700500971D2C /* MarqueeLabel */ = {
+			isa = PBXGroup;
+			children = (
+				F1364FCE1CA9700500971D2C /* MarqueeLabel.h */,
+				F1364FCF1CA9700500971D2C /* MarqueeLabel.m */,
+			);
+			path = MarqueeLabel;
+			sourceTree = "<group>";
+		};
+		F1364FD11CA9788A00971D2C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F1364FD21CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		F1F508171CA4A8BE00F1189B = {
+			isa = PBXGroup;
+			children = (
+				F1364FD11CA9788A00971D2C /* Fonts */,
+				F1364FCC1CA9700500971D2C /* Vendor */,
+				F1F508221CA4A8BE00F1189B /* newnowdynamics */,
+				F1F508211CA4A8BE00F1189B /* Products */,
+				689CE6B56EB4484D932FFEF0 /* Pods */,
+				5B31356C18DA0CD2D6A1A01D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F1F508211CA4A8BE00F1189B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1F508201CA4A8BE00F1189B /* New Now.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1F508221CA4A8BE00F1189B /* newnowdynamics */ = {
+			isa = PBXGroup;
+			children = (
+				F1F508231CA4A8BE00F1189B /* AppDelegate.swift */,
+				F1F508251CA4A8BE00F1189B /* SDWMainController.swift */,
+				F13662E61CA727F5005785A2 /* SDWPagable.swift */,
+				F13662E01CA71875005785A2 /* SDWTextViewController.swift */,
+				F1364FCB1CA87C6700971D2C /* newnowdynamics-Bridging-Header.h */,
+				F13662E21CA7195D005785A2 /* SDWAboutViewController.swift */,
+				F13662E41CA71A5E005785A2 /* SDWTextEditViewController.swift */,
+				F1F508271CA4A8BE00F1189B /* Main.storyboard */,
+				F1F5082A1CA4A8BE00F1189B /* Assets.xcassets */,
+				F1F5082C1CA4A8BE00F1189B /* LaunchScreen.storyboard */,
+				F1F5082F1CA4A8BE00F1189B /* Info.plist */,
+			);
+			path = newnowdynamics;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F1F5081F1CA4A8BE00F1189B /* newnowdynamics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1F508321CA4A8BE00F1189B /* Build configuration list for PBXNativeTarget "newnowdynamics" */;
+			buildPhases = (
+				D64D0CD4DD1184412F1A7BAE /* Check Pods Manifest.lock */,
+				F1F5081C1CA4A8BE00F1189B /* Sources */,
+				F1F5081D1CA4A8BE00F1189B /* Frameworks */,
+				F1F5081E1CA4A8BE00F1189B /* Resources */,
+				3BE0C6DE1E24AB90F0A93260 /* Embed Pods Frameworks */,
+				E65EE2541B0A948DEC60A2BE /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = newnowdynamics;
+			productName = newnowdynamics;
+			productReference = F1F508201CA4A8BE00F1189B /* New Now.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F1F508181CA4A8BE00F1189B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = SDWR;
+				TargetAttributes = {
+					F1F5081F1CA4A8BE00F1189B = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = F1F5081B1CA4A8BE00F1189B /* Build configuration list for PBXProject "newnowdynamics" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F1F508171CA4A8BE00F1189B;
+			productRefGroup = F1F508211CA4A8BE00F1189B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F1F5081F1CA4A8BE00F1189B /* newnowdynamics */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F1F5081E1CA4A8BE00F1189B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1F5082E1CA4A8BE00F1189B /* LaunchScreen.storyboard in Resources */,
+				F1F5082B1CA4A8BE00F1189B /* Assets.xcassets in Resources */,
+				F1364FD31CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf in Resources */,
+				F1F508291CA4A8BE00F1189B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3BE0C6DE1E24AB90F0A93260 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-newnowdynamics/Pods-newnowdynamics-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D64D0CD4DD1184412F1A7BAE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E65EE2541B0A948DEC60A2BE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-newnowdynamics/Pods-newnowdynamics-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F1F5081C1CA4A8BE00F1189B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1F508261CA4A8BE00F1189B /* SDWMainController.swift in Sources */,
+				F13662E71CA727F5005785A2 /* SDWPagable.swift in Sources */,
+				F1F508241CA4A8BE00F1189B /* AppDelegate.swift in Sources */,
+				F1364FD01CA9700600971D2C /* MarqueeLabel.m in Sources */,
+				F13662E11CA71875005785A2 /* SDWTextViewController.swift in Sources */,
+				F13662E31CA7195D005785A2 /* SDWAboutViewController.swift in Sources */,
+				F13662E51CA71A5E005785A2 /* SDWTextEditViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F1F508271CA4A8BE00F1189B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1F508281CA4A8BE00F1189B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F1F5082C1CA4A8BE00F1189B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1F5082D1CA4A8BE00F1189B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F1F508301CA4A8BE00F1189B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F1F508311CA4A8BE00F1189B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F1F508331CA4A8BE00F1189B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B3D2EC818FFDC985A0AC664 /* Pods-newnowdynamics.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Black";
+				INFOPLIST_FILE = newnowdynamics/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sdwr.newnowdynamics;
+				PRODUCT_NAME = "New Now";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "newnowdynamics/newnowdynamics-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		F1F508341CA4A8BE00F1189B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0967AA0702C9D45C3FCB888 /* Pods-newnowdynamics.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Black";
+				INFOPLIST_FILE = newnowdynamics/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sdwr.newnowdynamics;
+				PRODUCT_NAME = "New Now";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "newnowdynamics/newnowdynamics-Bridging-Header.h";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F1F5081B1CA4A8BE00F1189B /* Build configuration list for PBXProject "newnowdynamics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1F508301CA4A8BE00F1189B /* Debug */,
+				F1F508311CA4A8BE00F1189B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1F508321CA4A8BE00F1189B /* Build configuration list for PBXNativeTarget "newnowdynamics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1F508331CA4A8BE00F1189B /* Debug */,
+				F1F508341CA4A8BE00F1189B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F1F508181CA4A8BE00F1189B /* Project object */;
+}

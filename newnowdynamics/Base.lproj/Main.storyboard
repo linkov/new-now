@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E64a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="ProximaNovaCondensedSemibold.otf">
+            <string>ProximaNovaCond-Semibold</string>
+        </mutableArray>
+    </customFonts>
+    <scenes>
+        <!--Page View Controller-->
+        <scene sceneID="cJn-qh-vWb">
+            <objects>
+                <pageViewController storyboardIdentifier="SDWPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="vertical" spineLocation="none" id="jnZ-Le-oYA" sceneMemberID="viewController">
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eTH-c4-yiX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="181" y="-28"/>
+        </scene>
+        <!--Text View Controller-->
+        <scene sceneID="V2Q-jo-wBk">
+            <objects>
+                <viewController storyboardIdentifier="SDWTextViewController" id="DaV-Wr-zW2" customClass="SDWTextViewController" customModule="newnowdynamics" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dVd-Fg-nyc"/>
+                        <viewControllerLayoutGuide type="bottom" id="d6T-rS-Et5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="toI-7G-uIG">
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sfq-GY-frb" userLabel="textContainer">
+                                <rect key="frame" x="0.0" y="60" width="568" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="THIS VERY MOMENT HAS ALREADY BECOME THE PAST –" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dV6-SV-wsQ" customClass="MarqueeLabel">
+                                        <rect key="frame" x="0.0" y="52.5" width="568" height="95.5"/>
+                                        <fontDescription key="fontDescription" name="ProximaNovaCond-Semibold" family="Proxima Nova Condensed" pointSize="80"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="marqueeType">
+                                                <integer key="value" value="0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.25914248665014328" green="0.72704008956665223" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="dV6-SV-wsQ" firstAttribute="centerY" secondItem="Sfq-GY-frb" secondAttribute="centerY" id="K16-mN-5zz"/>
+                                    <constraint firstAttribute="trailing" secondItem="dV6-SV-wsQ" secondAttribute="trailing" id="LKZ-73-AfS"/>
+                                    <constraint firstItem="dV6-SV-wsQ" firstAttribute="leading" secondItem="Sfq-GY-frb" secondAttribute="leading" id="uCL-Vh-oJv"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="I4C-eC-pyp" appends="YES" id="pQo-jN-vxf"/>
+                                    <outletCollection property="gestureRecognizers" destination="cBc-gH-oXd" appends="YES" id="u8o-H4-VQK"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Sfq-GY-frb" firstAttribute="top" secondItem="dVd-Fg-nyc" secondAttribute="bottom" constant="60" id="3JW-w6-dAK"/>
+                            <constraint firstItem="Sfq-GY-frb" firstAttribute="leading" secondItem="toI-7G-uIG" secondAttribute="leading" id="NNr-WH-kFn"/>
+                            <constraint firstAttribute="trailing" secondItem="Sfq-GY-frb" secondAttribute="trailing" id="ogW-4m-n6e"/>
+                            <constraint firstItem="d6T-rS-Et5" firstAttribute="top" secondItem="Sfq-GY-frb" secondAttribute="bottom" constant="60" id="rYN-K6-Ghz"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="B8J-he-5Fz" appends="YES" id="WBD-05-ikD"/>
+                        </connections>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="mainTextLabel" destination="dV6-SV-wsQ" id="Unv-zO-0NI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kKE-1Q-c20" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="I4C-eC-pyp">
+                    <connections>
+                        <action selector="didPan:" destination="DaV-Wr-zW2" id="aOF-yj-OI0"/>
+                    </connections>
+                </panGestureRecognizer>
+                <tapGestureRecognizer id="B8J-he-5Fz">
+                    <connections>
+                        <action selector="didTap:" destination="DaV-Wr-zW2" id="WFk-hp-8kf"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <pinchGestureRecognizer id="cBc-gH-oXd">
+                    <connections>
+                        <action selector="didPinch:" destination="DaV-Wr-zW2" id="BSD-mk-qxy"/>
+                    </connections>
+                </pinchGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1044" y="-79"/>
+        </scene>
+        <!--Text Edit View Controller-->
+        <scene sceneID="1fa-z1-ilf">
+            <objects>
+                <viewController storyboardIdentifier="SDWTextEditViewController" id="4Vz-cb-8BV" customClass="SDWTextEditViewController" customModule="newnowdynamics" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="E7G-lM-Gbf"/>
+                        <viewControllerLayoutGuide type="bottom" id="xpG-xk-TLH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KMd-VG-bbJ">
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-fT-sol">
+                                <rect key="frame" x="269" y="149" width="30" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hwU-fT-sol" firstAttribute="centerX" secondItem="KMd-VG-bbJ" secondAttribute="centerX" id="k0G-FK-hRI"/>
+                            <constraint firstItem="hwU-fT-sol" firstAttribute="centerY" secondItem="KMd-VG-bbJ" secondAttribute="centerY" id="usV-Ij-wJg"/>
+                        </constraints>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WCo-3p-Pd1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1044" y="346"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="O6d-ze-368">
+            <objects>
+                <viewController storyboardIdentifier="SDWAboutViewController" id="Egd-8S-cXX" customClass="SDWAboutViewController" customModule="newnowdynamics" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1uc-dQ-sSQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZdO-ed-1Ib"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VMS-VH-XCc">
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPZ-Ci-wf0">
+                                <rect key="frame" x="261" y="149" width="46.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rPZ-Ci-wf0" firstAttribute="centerY" secondItem="VMS-VH-XCc" secondAttribute="centerY" id="evV-Jp-xqX"/>
+                            <constraint firstItem="rPZ-Ci-wf0" firstAttribute="centerX" secondItem="VMS-VH-XCc" secondAttribute="centerX" id="gbg-p2-wXW"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KUt-pJ-DLp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1044" y="-469"/>
+        </scene>
+        <!--Main Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="SDWMainController" customModule="newnowdynamics" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="181" y="357"/>
+        </scene>
+    </scenes>
+</document>
