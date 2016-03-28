@@ -10,6 +10,7 @@ import UIKit
 
 class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate {
 
+    var panGestureBeganTime:NSTimeInterval = 0
     var previousScrollSpeed:CGFloat = 0
     let index:NSInteger = 1
     let baseText:String = " THIS VERY MOMENT HAS ALREADY BECOME THE PAST – "
@@ -79,6 +80,10 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
         } else if (sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Failed) {
 
+            if self .shouldPerformPan() == false {
+                return
+            }
+
             let velocity:CGPoint = sender.velocityInView(self.view!)
             let velocityX:CGFloat = velocity.x
 
@@ -91,8 +96,21 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
             self.mainTextLabel.rate = fabs(velocityX)
             self.previousScrollSpeed = self.mainTextLabel.rate
+            self.panGestureBeganTime = NSDate().timeIntervalSince1970
 
         }
         
+    }
+
+    func shouldPerformPan() -> Bool {
+
+        let delta:NSTimeInterval = NSDate().timeIntervalSince1970 - self.panGestureBeganTime
+
+        if delta < 0.5 {
+
+            return false
+        }
+
+        return true
     }
 }

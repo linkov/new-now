@@ -24,7 +24,7 @@
         <!--Text View Controller-->
         <scene sceneID="V2Q-jo-wBk">
             <objects>
-                <viewController storyboardIdentifier="SDWTextViewController" id="DaV-Wr-zW2" customClass="SDWTextViewController" customModule="newnowdynamics" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SDWTextViewController" id="DaV-Wr-zW2" customClass="SDWTextViewController" customModule="New_Now" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dVd-Fg-nyc"/>
                         <viewControllerLayoutGuide type="bottom" id="d6T-rS-Et5"/>
@@ -99,7 +99,7 @@
         <!--Text Edit View Controller-->
         <scene sceneID="1fa-z1-ilf">
             <objects>
-                <viewController storyboardIdentifier="SDWTextEditViewController" id="4Vz-cb-8BV" customClass="SDWTextEditViewController" customModule="newnowdynamics" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SDWTextEditViewController" id="4Vz-cb-8BV" customClass="SDWTextEditViewController" customModule="New_Now" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="E7G-lM-Gbf"/>
                         <viewControllerLayoutGuide type="bottom" id="xpG-xk-TLH"/>
@@ -130,7 +130,7 @@
         <!--About View Controller-->
         <scene sceneID="O6d-ze-368">
             <objects>
-                <viewController storyboardIdentifier="SDWAboutViewController" id="Egd-8S-cXX" customClass="SDWAboutViewController" customModule="newnowdynamics" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SDWAboutViewController" id="Egd-8S-cXX" customClass="SDWAboutViewController" customModule="New_Now" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1uc-dQ-sSQ"/>
                         <viewControllerLayoutGuide type="bottom" id="ZdO-ed-1Ib"/>
@@ -162,7 +162,7 @@
         <!--Main Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SDWMainController" customModule="newnowdynamics" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SDWMainController" customModule="New_Now" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
