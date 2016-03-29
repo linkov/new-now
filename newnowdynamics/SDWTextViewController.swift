@@ -11,7 +11,7 @@ import UIKit
 
 class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate {
 
-    var timeOffset:CFTimeInterval = 0
+    var lastVelocitySpeed:Float = 0
     var velocityX:CGFloat = 0
     var panGestureBeganTime:NSTimeInterval = 0
     var previousScrollSpeed:CGFloat = 0
@@ -38,6 +38,21 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
 
     }
+
+
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+
+
+      //  self.mainTextLabel.pauseLabel()
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+       // self.mainTextLabel.unpauseLabel()
+    }
+
+
     @IBAction func didLongPress(sender: UILongPressGestureRecognizer) {
 
         let velocitySpeed:Float = self.mainTextLabel.sublabel.layer.speed/2
@@ -73,7 +88,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
             var pointSize:CGFloat  = (sender.velocity > 0.0 ? 1.0 : -1.0) + self.mainTextLabel.font.pointSize;
             pointSize = max(min(pointSize, 250), 20);
-            self.mainTextLabel.font = UIFont.systemFontOfSize(pointSize)
+            self.mainTextLabel.font = UIFont(name: (self.mainTextLabel.font?.fontName)!, size: pointSize)
 
         } else if (sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Failed) {
         }
@@ -113,11 +128,42 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
             self.mainTextLabel.maskLayer?.speed = velocitySpeed
 
 
+            self.lastVelocitySpeed = velocitySpeed
+
+
+
         } else if (sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Failed) {
 
 
+            if self.lastVelocitySpeed < 0.8 {
+                self.restartMoving()
+            }
+
         }
         
+    }
+
+    func restartMoving() -> Void {
+
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+
+            if self.lastVelocitySpeed < 0.8 {
+
+                self.mainTextLabel.sublabel.layer.timeOffset = self.mainTextLabel.sublabel.layer .convertTime(CACurrentMediaTime(), fromLayer: nil);
+                self.mainTextLabel.sublabel.layer.beginTime = CACurrentMediaTime();
+                self.mainTextLabel.sublabel.layer.speed = 3
+
+                self.mainTextLabel.maskLayer?.timeOffset = (self.mainTextLabel.maskLayer?.convertTime(CACurrentMediaTime(), fromLayer: nil))!;
+                self.mainTextLabel.maskLayer?.beginTime = CACurrentMediaTime();
+                self.mainTextLabel.maskLayer?.speed = 3
+
+                self.lastVelocitySpeed = 3
+
+            }
+
+
+        }
     }
 
 }

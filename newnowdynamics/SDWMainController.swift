@@ -40,14 +40,6 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource {
     }
 
 
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
-
-
-    }
-
-
     // MARK: UIPageViewControllerDataSource
 
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
