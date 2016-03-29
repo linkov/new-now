@@ -43,6 +43,7 @@ typedef void(^MLAnimationCompletionBlock)(BOOL finished);
 @property (nonatomic, assign) CGFloat awayOffset;
 @property (nonatomic, assign, readwrite) BOOL isPaused;
 
+@property CGPoint actualPos;
 // Support
 @property (nonatomic, strong) NSArray *gradientColors;
 CGPoint MLOffsetCGPoint(CGPoint point, CGFloat offset);
@@ -296,11 +297,12 @@ CGPoint MLOffsetCGPoint(CGPoint point, CGFloat offset);
     // Calculate expected size
     CGSize expectedLabelSize = [self subLabelSize];
     
-    
+ #warning should we disable?
     // Invalidate intrinsic size
     [self invalidateIntrinsicContentSize];
     
     // Move to home
+#warning should we disable?
     [self returnLabelToOriginImmediately];
     
     // Configure gradient for the current condition
@@ -357,7 +359,8 @@ CGPoint MLOffsetCGPoint(CGPoint point, CGFloat offset);
                 self.homeLabelFrame = CGRectIntegral(CGRectMake(self.bounds.size.width - (expectedLabelSize.width + self.leadingBuffer), 0.0f, expectedLabelSize.width, self.bounds.size.height));
                 self.awayOffset = (self.homeLabelFrame.size.width + minTrailing);
             }
-            
+
+            #warning should we disable?
             self.subLabel.frame = self.homeLabelFrame;
             
             // Configure replication
@@ -432,6 +435,8 @@ CGPoint MLOffsetCGPoint(CGPoint point, CGFloat offset);
     // Calculate expected size
     CGSize expectedLabelSize = CGSizeZero;
     CGSize maximumLabelSize = CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX);
+
+
 
 #warning crashes sometimes
     // Get size of subLabel
@@ -601,26 +606,93 @@ CGPoint MLOffsetCGPoint(CGPoint point, CGFloat offset);
     // Call pre-animation method
     [self labelWillBeginScroll];
     
-    // Animate
-    [CATransaction begin];
+
     
-    // Set Duration
-    [CATransaction setAnimationDuration:(delayAmount + interval)];
-    
-    // Create animation for gradient, if needed
-    if (self.fadeLength != 0.0f) {
-        if (!gradientAnimation) {
-            gradientAnimation = [self keyFrameAnimationForGradientFadeLength:self.fadeLength
-                                                                    interval:interval
-                                                                       delay:delayAmount];
-        }
-        [self.layer.mask addAnimation:gradientAnimation forKey:@"gradient"];
-    }
-    
+//    // Create animation for gradient, if needed
+//    if (self.fadeLength != 0.0f) {
+//        if (!gradientAnimation) {
+//            gradientAnimation = [self keyFrameAnimationForGradientFadeLength:self.fadeLength
+//                                                                    interval:interval
+//                                                                       delay:delayAmount];
+//        }
+//        [self.layer.mask addAnimation:gradientAnimation forKey:@"gradient"];
+//    }
+
     // Create animation for sublabel positions, if needed
-    if (!labelAnimation) {
-        CGPoint homeOrigin = self.homeLabelFrame.origin;
-        CGPoint awayOrigin = MLOffsetCGPoint(self.homeLabelFrame.origin, self.awayOffset);
+    //if (!labelAnimation) {
+
+        // Animate
+        [CATransaction begin];
+
+        // Set Duration
+        [CATransaction setAnimationDuration:(delayAmount + interval)];
+
+
+
+//        CGPoint startPoint;
+//
+//        if (self.actualPos.x) {
+//            startPoint = self.actualPos;
+//        } else {
+//            startPoint = homeOrigin;
+//        }
+
+        CGPoint currentPositionLayer1 = [[[[self.layer sublayers] firstObject] presentationLayer] position];
+//
+//        CALayer *child =[[self.layer sublayers] firstObject];
+//        CALayer *parent = self.layer;
+//
+//        // Child center relative to parent
+//        CGPoint childPosition = ((CALayer *)child.presentationLayer).position;
+//
+//        // Parent center relative to UIView
+//        CGPoint parentPosition = ((CALayer *)parent.presentationLayer).position;
+//        CGPoint parentCenter = CGPointMake(parent.bounds.size.width/2.0, parent.bounds.size.height /2.0);
+//
+//        // Child center relative to parent center
+//        CGPoint relativePos = CGPointMake(childPosition.x - parentCenter.x, childPosition.y - parentCenter.y);
+//
+//        // Transformed child position based on parent's transform (rotations, scale etc)
+//        CGPoint transformedChildPos = CGPointApplyAffineTransform(relativePos, ((CALayer *)parent.presentationLayer).affineTransform);
+//
+//        // And finally...
+//        CGPoint positionInView = CGPointMake(parentPosition.x +transformedChildPos.x, parentPosition.y + transformedChildPos.y);
+
+
+       // NSLog(@"currentPositionLayer1 %f", -(fabs(self.awayOffset) - (currentPositionLayer1.x-self.awayOffset)));
+//        NSLog(@"positionInView %f",positionInView.x);
+
+    CGPoint homeOrigin;
+    CGPoint awayOrigin;
+
+//    if (labelAnimation) {
+//
+//        homeOrigin = self.homeLabelFrame.origin;
+//        awayOrigin = MLOffsetCGPoint(self.homeLabelFrame.origin, self.awayOffset);
+//
+//    } else {
+
+    if (self.marqueeType == MLContinuous) {
+
+        homeOrigin = CGPointMake(-(fabs(self.awayOffset) - (currentPositionLayer1.x-self.awayOffset)), 0);
+        awayOrigin = MLOffsetCGPoint(homeOrigin, self.awayOffset);
+
+    } else if(self.marqueeType == MLContinuousReverse ) {
+
+        homeOrigin = CGPointMake((currentPositionLayer1.x-self.awayOffset), 0);
+        awayOrigin = MLOffsetCGPoint(homeOrigin, self.awayOffset);
+
+    }
+
+
+//    }
+
+        //startPoint = homeOrigin;
+
+  //      [[self.layer presentationLayer] frame]
+//        CGPoint pointInViewCoords = [self convertPoint:self.frame.origin fromView:mainWindow];
+
+
         NSArray *values = @[[NSValue valueWithCGPoint:homeOrigin],      // Initial location, home
                             [NSValue valueWithCGPoint:homeOrigin],      // Initial delay, at home
                             [NSValue valueWithCGPoint:awayOrigin]];     // Animation to home
@@ -629,39 +701,51 @@ CGPoint MLOffsetCGPoint(CGPoint point, CGFloat offset);
                                                      values:values
                                                    interval:interval
                                                       delay:delayAmount];
-    }
-    
-    MLAnimationCompletionBlock completionBlock = ^(BOOL finished) {
-        if (!finished) {
-            // Do not continue into the next loop
-            return;
-        }
-        // Call returned home method
-        [self labelReturnedToHome:YES];
-        // Check to ensure that:
-        // 1) We don't double fire if an animation already exists
-        // 2) The instance is still attached to a window - this completion block is called for
-        //    many reasons, including if the animation is removed due to the view being removed
-        //    from the UIWindow (typically when the view controller is no longer the "top" view)
-        if (self.window && ![self.subLabel.layer animationForKey:@"position"]) {
-            // Begin again, if conditions met
-            if (self.labelShouldScroll && !self.tapToScroll && !self.holdScrolling) {
-                [self scrollContinuousWithInterval:interval
-                                             after:delayAmount
-                                    labelAnimation:labelAnimation
-                                 gradientAnimation:gradientAnimation];
+
+
+
+
+
+
+
+
+        MLAnimationCompletionBlock completionBlock = ^(BOOL finished) {
+            if (!finished) {
+                // Do not continue into the next loop
+                return;
             }
-        }
-    };
+            // Call returned home method
+            [self labelReturnedToHome:YES];
+            // Check to ensure that:
+            // 1) We don't double fire if an animation already exists
+            // 2) The instance is still attached to a window - this completion block is called for
+            //    many reasons, including if the animation is removed due to the view being removed
+            //    from the UIWindow (typically when the view controller is no longer the "top" view)
+            if (self.window && ![self.subLabel.layer animationForKey:@"position"]) {
+                // Begin again, if conditions met
+                if (self.labelShouldScroll && !self.tapToScroll && !self.holdScrolling) {
+                    self.subLabel.layer.position = homeOrigin;
+                    [self scrollContinuousWithInterval:interval
+                                                 after:delayAmount
+                                        labelAnimation:labelAnimation
+                                     gradientAnimation:gradientAnimation];
+                }
+            }
+        };
+
+
+
+
+        // Attach completion block
+        [labelAnimation setValue:completionBlock forKey:kMarqueeLabelAnimationCompletionBlock];
+
+        // Add animation
+        [self.subLabel.layer addAnimation:labelAnimation forKey:@"position"];
+
+        [CATransaction commit];
+  //  }
     
-    
-    // Attach completion block
-    [labelAnimation setValue:completionBlock forKey:kMarqueeLabelAnimationCompletionBlock];
-    
-    // Add animation
-    [self.subLabel.layer addAnimation:labelAnimation forKey:@"position"];
-    
-    [CATransaction commit];
+
 }
 
 - (void)applyGradientMaskForFadeLength:(CGFloat)fadeLength animated:(BOOL)animated {
@@ -927,7 +1011,9 @@ CGPoint MLOffsetCGPoint(CGPoint point, CGFloat offset);
     // Set values
     animation.values = values;
     animation.delegate = self;
-    
+//    animation.removedOnCompletion = NO;
+//    animation.fillMode = kCAFillModeForwards;
+
     return animation;
 }
 

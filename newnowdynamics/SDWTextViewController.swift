@@ -8,8 +8,11 @@
 
 import UIKit
 
+
 class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate {
 
+    var timeOffset:CFTimeInterval = 0
+    var velocityX:CGFloat = 0
     var panGestureBeganTime:NSTimeInterval = 0
     var previousScrollSpeed:CGFloat = 0
     let index:NSInteger = 1
@@ -23,16 +26,30 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
         super.viewDidLoad()
 
         self.mainTextLabel.text = self.baseText
-        self.mainTextLabel.marqueeType = MarqueeType.MLContinuous
+        self.mainTextLabel.type = .Continuous
         self.mainTextLabel.triggerScrollStart()
         self.mainTextLabel.animationDelay = 0.0
-        self.mainTextLabel.rate = 10
+        self.mainTextLabel.speed = .Rate(10.0)
     }
 
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
+
+    }
+    @IBAction func didLongPress(sender: UILongPressGestureRecognizer) {
+
+        let velocitySpeed:Float = self.mainTextLabel.sublabel.layer.speed/2
+
+
+        self.mainTextLabel.sublabel.layer.timeOffset = self.mainTextLabel.sublabel.layer .convertTime(CACurrentMediaTime(), fromLayer: nil);
+        self.mainTextLabel.sublabel.layer.beginTime = CACurrentMediaTime();
+        self.mainTextLabel.sublabel.layer.speed = velocitySpeed
+
+        self.mainTextLabel.maskLayer?.timeOffset = (self.mainTextLabel.maskLayer?.convertTime(CACurrentMediaTime(), fromLayer: nil))!;
+        self.mainTextLabel.maskLayer?.beginTime = CACurrentMediaTime();
+        self.mainTextLabel.maskLayer?.speed = velocitySpeed
 
     }
 
@@ -51,7 +68,6 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
         if sender.state == UIGestureRecognizerState.Began {
 
-           self.mainTextLabel.rate = 10
         }
         else if sender.state == UIGestureRecognizerState.Changed {
 
@@ -60,8 +76,6 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
             self.mainTextLabel.font = UIFont.systemFontOfSize(pointSize)
 
         } else if (sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Failed) {
-
-            self.mainTextLabel.rate = self.previousScrollSpeed
         }
 
 
@@ -70,47 +84,40 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
     @IBAction func didPan(sender: UIPanGestureRecognizer) {
 
 
+
         if sender.state == UIGestureRecognizerState.Began {
 
-            // do nothing
+
         }
         else if sender.state == UIGestureRecognizerState.Changed {
 
-            // do nothing
-
-        } else if (sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Failed) {
-
-            if self .shouldPerformPan() == false {
-                return
-            }
-
             let velocity:CGPoint = sender.velocityInView(self.view!)
-            let velocityX:CGFloat = velocity.x
+            velocityX = velocity.x
 
             if velocityX > 0 {
 
-                self.mainTextLabel.marqueeType = MarqueeType.MLContinuousReverse
+                self.mainTextLabel.type = .ContinuousReverse
             } else {
-                self.mainTextLabel.marqueeType = MarqueeType.MLContinuous
+                self.mainTextLabel.type = .Continuous
             }
 
-            self.mainTextLabel.rate = fabs(velocityX)
-            self.previousScrollSpeed = self.mainTextLabel.rate
-            self.panGestureBeganTime = NSDate().timeIntervalSince1970
+            let velocitySpeed:Float = Float(fabs(velocityX/10))
+            print(velocitySpeed)
+
+             self.mainTextLabel.sublabel.layer.timeOffset = self.mainTextLabel.sublabel.layer .convertTime(CACurrentMediaTime(), fromLayer: nil);
+            self.mainTextLabel.sublabel.layer.beginTime = CACurrentMediaTime();
+            self.mainTextLabel.sublabel.layer.speed = velocitySpeed
+
+            self.mainTextLabel.maskLayer?.timeOffset = (self.mainTextLabel.maskLayer?.convertTime(CACurrentMediaTime(), fromLayer: nil))!;
+            self.mainTextLabel.maskLayer?.beginTime = CACurrentMediaTime();
+            self.mainTextLabel.maskLayer?.speed = velocitySpeed
+
+
+        } else if (sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Failed) {
+
 
         }
         
     }
 
-    func shouldPerformPan() -> Bool {
-
-        let delta:NSTimeInterval = NSDate().timeIntervalSince1970 - self.panGestureBeganTime
-
-        if delta < 0.5 {
-
-            return false
-        }
-
-        return true
-    }
 }

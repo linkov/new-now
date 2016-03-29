@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F1364FD01CA9700600971D2C /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F1364FCF1CA9700500971D2C /* MarqueeLabel.m */; };
 		F1364FD31CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1364FD21CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf */; };
+		F1364FD81CAA225D00971D2C /* MarqueeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1364FD71CAA225D00971D2C /* MarqueeLabel.swift */; };
 		F13662E11CA71875005785A2 /* SDWTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13662E01CA71875005785A2 /* SDWTextViewController.swift */; };
 		F13662E31CA7195D005785A2 /* SDWAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13662E21CA7195D005785A2 /* SDWAboutViewController.swift */; };
 		F13662E51CA71A5E005785A2 /* SDWTextEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13662E41CA71A5E005785A2 /* SDWTextEditViewController.swift */; };
@@ -29,6 +30,7 @@
 		F1364FCE1CA9700500971D2C /* MarqueeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeLabel.h; sourceTree = "<group>"; };
 		F1364FCF1CA9700500971D2C /* MarqueeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeLabel.m; sourceTree = "<group>"; };
 		F1364FD21CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ProximaNovaCondensedSemibold.otf; sourceTree = "<group>"; };
+		F1364FD71CAA225D00971D2C /* MarqueeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MarqueeLabel.swift; path = "../../../../../../Downloads/MarqueeLabel-Swift-2.6.5/Classes/MarqueeLabel.swift"; sourceTree = "<group>"; };
 		F13662E01CA71875005785A2 /* SDWTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWTextViewController.swift; sourceTree = "<group>"; };
 		F13662E21CA7195D005785A2 /* SDWAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWAboutViewController.swift; sourceTree = "<group>"; };
 		F13662E41CA71A5E005785A2 /* SDWTextEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWTextEditViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 		F1364FCC1CA9700500971D2C /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				F1364FD41CA9BFF100971D2C /* MarqueeLabel-Swift */,
 				F1364FCD1CA9700500971D2C /* MarqueeLabel */,
 			);
 			name = Vendor;
@@ -95,6 +98,14 @@
 				F1364FD21CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		F1364FD41CA9BFF100971D2C /* MarqueeLabel-Swift */ = {
+			isa = PBXGroup;
+			children = (
+				F1364FD71CAA225D00971D2C /* MarqueeLabel.swift */,
+			);
+			path = "MarqueeLabel-Swift";
 			sourceTree = "<group>";
 		};
 		F1F508171CA4A8BE00F1189B = {
@@ -263,6 +274,7 @@
 				F1F508241CA4A8BE00F1189B /* AppDelegate.swift in Sources */,
 				F1364FD01CA9700600971D2C /* MarqueeLabel.m in Sources */,
 				F13662E11CA71875005785A2 /* SDWTextViewController.swift in Sources */,
+				F1364FD81CAA225D00971D2C /* MarqueeLabel.swift in Sources */,
 				F13662E31CA7195D005785A2 /* SDWAboutViewController.swift in Sources */,
 				F13662E51CA71A5E005785A2 /* SDWTextEditViewController.swift in Sources */,
 			);
