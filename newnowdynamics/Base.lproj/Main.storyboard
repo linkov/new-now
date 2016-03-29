@@ -34,13 +34,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sfq-GY-frb" userLabel="textContainer">
-                                <rect key="frame" x="0.0" y="60" width="568" height="200"/>
+                                <rect key="frame" x="0.0" y="50" width="568" height="250"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="THIS VERY MOMENT HAS ALREADY BECOME THE PAST –" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dV6-SV-wsQ" customClass="MarqueeLabel" customModule="New_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="52.5" width="568" height="95.5"/>
-                                        <fontDescription key="fontDescription" name="ProximaNovaCond-Semibold" family="Proxima Nova Condensed" pointSize="120"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="THIS VERY MOMENT HAS ALREADY BECOME THE PAST –" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dV6-SV-wsQ" customClass="MarqueeLabel" customModule="New_Now">
+                                        <rect key="frame" x="0.0" y="-58.5" width="568" height="366"/>
+                                        <fontDescription key="fontDescription" name="ProximaNovaCond-Semibold" family="Proxima Nova Condensed" pointSize="300"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="labelize" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.25914248665014328" green="0.72704008956665223" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -57,10 +60,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Sfq-GY-frb" firstAttribute="top" secondItem="dVd-Fg-nyc" secondAttribute="bottom" constant="60" id="3JW-w6-dAK"/>
+                            <constraint firstItem="Sfq-GY-frb" firstAttribute="top" secondItem="dVd-Fg-nyc" secondAttribute="bottom" constant="50" id="3JW-w6-dAK"/>
                             <constraint firstItem="Sfq-GY-frb" firstAttribute="leading" secondItem="toI-7G-uIG" secondAttribute="leading" id="NNr-WH-kFn"/>
                             <constraint firstAttribute="trailing" secondItem="Sfq-GY-frb" secondAttribute="trailing" id="ogW-4m-n6e"/>
-                            <constraint firstItem="d6T-rS-Et5" firstAttribute="top" secondItem="Sfq-GY-frb" secondAttribute="bottom" constant="60" id="rYN-K6-Ghz"/>
+                            <constraint firstItem="d6T-rS-Et5" firstAttribute="top" secondItem="Sfq-GY-frb" secondAttribute="bottom" constant="20" id="rYN-K6-Ghz"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="B8J-he-5Fz" appends="YES" id="WBD-05-ikD"/>

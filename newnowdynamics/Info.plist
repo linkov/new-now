@@ -19,7 +19,22 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>4</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>7afe2a1f919e83706ec88df871b173b4faf5c453</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict>
+					<key>KitName</key>
+					<string>Crashlytics</string>
+				</dict>
+			</dict>
+		</array>
+	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>

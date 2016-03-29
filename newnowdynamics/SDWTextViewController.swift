@@ -11,6 +11,7 @@ import UIKit
 
 class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate {
 
+    var pinchFontBeginSpeed:Float!
     var lastVelocitySpeed:Float = 0
     var velocityX:CGFloat = 0
     var panGestureBeganTime:NSTimeInterval = 0
@@ -26,6 +27,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
         self.mainTextLabel.text = self.baseText
         self.mainTextLabel.type = .Continuous
 
+        self.mainTextLabel.font = UIFont(name: self.mainTextLabel.font.fontName, size: 500)
         self.mainTextLabel.animationDelay = 0.0
         self.mainTextLabel.speed = .Rate(10.0)
         self.mainTextLabel.triggerScrollStart()
@@ -35,7 +37,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
     @IBAction func didLongPress(sender: UILongPressGestureRecognizer) {
 
         let velocitySpeed:Float = self.mainTextLabel.sublabel.layer.speed/2
-        self.updateToSpeed(velocitySpeed)
+        self.updateToSpeed(velocitySpeed,shouldRestart:  true)
 
     }
 
@@ -54,18 +56,23 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
         if sender.state == UIGestureRecognizerState.Began {
 
-            // do nothing
+            self.pinchFontBeginSpeed = self.mainTextLabel.sublabel.layer.speed
+            self.updateToSpeed(0,shouldRestart:  false)
 
         }
         else if sender.state == UIGestureRecognizerState.Changed {
 
-            var pointSize:CGFloat  = (sender.velocity > 0.0 ? 1.0 : -1.0) + self.mainTextLabel.font.pointSize;
-            pointSize = max(min(pointSize, 250), 20);
+            var pointSize:CGFloat  = (sender.velocity > 0.0 ? 10.0 : -10.0) + self.mainTextLabel.font.pointSize;
+            pointSize = max(min(pointSize, 500), 60);
+            //print(pointSize)
             self.mainTextLabel.font = UIFont(name: (self.mainTextLabel.font?.fontName)!, size: pointSize)
+
 
         } else if (sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Failed) {
 
-            // do nothing
+            //MarqueeLabel.controllerLabelsAnimate(self)
+            self.updateToSpeed(self.pinchFontBeginSpeed,shouldRestart:  true)
+
         }
 
 
@@ -93,17 +100,12 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
             let velocitySpeed:Float = Float(fabs(velocityX/10))
 
-            self.updateToSpeed(velocitySpeed)
-            self.lastVelocitySpeed = velocitySpeed
+            self.updateToSpeed(velocitySpeed,shouldRestart:  true)
 
 
 
         } else if (sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Failed) {
 
-
-            if self.lastVelocitySpeed < 0.8 {
-                self.restartMoving()
-            }
 
         }
         
@@ -116,7 +118,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
             if self.lastVelocitySpeed < 0.8 {
 
-                self.updateToSpeed(1)
+                self.updateToSpeed(1,shouldRestart:  false)
             }
 
 
@@ -124,19 +126,19 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
         let delayTime1 = dispatch_time(DISPATCH_TIME_NOW, Int64(4 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime1, dispatch_get_main_queue()) {
 
-            self.updateToSpeed(2)
+            self.updateToSpeed(2,shouldRestart:  false)
             
         }
 
         let delayTime2 = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime2, dispatch_get_main_queue()) {
             
-            self.updateToSpeed(3)
+            self.updateToSpeed(3,shouldRestart:  false)
         }
     }
 
 
-    private func updateToSpeed(newSpeed:Float) -> Void {
+    private func updateToSpeed(newSpeed:Float, shouldRestart:Bool) -> Void {
 
         self.mainTextLabel.sublabel.layer.timeOffset = self.mainTextLabel.sublabel.layer .convertTime(CACurrentMediaTime(), fromLayer: nil);
         self.mainTextLabel.sublabel.layer.beginTime = CACurrentMediaTime();
@@ -145,25 +147,14 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
         self.mainTextLabel.maskLayer?.timeOffset = (self.mainTextLabel.maskLayer?.convertTime(CACurrentMediaTime(), fromLayer: nil))!;
         self.mainTextLabel.maskLayer?.beginTime = CACurrentMediaTime();
         self.mainTextLabel.maskLayer?.speed = newSpeed
+        self.lastVelocitySpeed = newSpeed
 
-    }
 
 
-    private func timingFunctionForAnimationCurve(curve: UIViewAnimationCurve) -> CAMediaTimingFunction {
-        let timingFunction: String?
-
-        switch curve {
-        case .EaseIn:
-            timingFunction = kCAMediaTimingFunctionEaseIn
-        case .EaseInOut:
-            timingFunction = kCAMediaTimingFunctionEaseInEaseOut
-        case .EaseOut:
-            timingFunction = kCAMediaTimingFunctionEaseOut
-        default:
-            timingFunction = kCAMediaTimingFunctionLinear
+        if self.lastVelocitySpeed < 0.8 && shouldRestart {
+            self.restartMoving()
         }
 
-        return CAMediaTimingFunction(name: timingFunction!)
     }
 
 }
