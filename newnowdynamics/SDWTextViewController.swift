@@ -18,53 +18,24 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
     let index:NSInteger = 1
     let baseText:String = " THIS VERY MOMENT HAS ALREADY BECOME THE PAST – "
     @IBOutlet var mainTextLabel: MarqueeLabel!
-    var animator:UIDynamicAnimator!
-    var linearVelocity:UIDynamicItemBehavior!
-    var gravityBehaviour:UIGravityBehavior!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
         self.mainTextLabel.text = self.baseText
         self.mainTextLabel.type = .Continuous
-        self.mainTextLabel.triggerScrollStart()
+
         self.mainTextLabel.animationDelay = 0.0
         self.mainTextLabel.speed = .Rate(10.0)
-    }
-
-
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
-
-    }
-
-
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-
-
-      //  self.mainTextLabel.pauseLabel()
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-       // self.mainTextLabel.unpauseLabel()
+        self.mainTextLabel.triggerScrollStart()
     }
 
 
     @IBAction func didLongPress(sender: UILongPressGestureRecognizer) {
 
         let velocitySpeed:Float = self.mainTextLabel.sublabel.layer.speed/2
-
-
-        self.mainTextLabel.sublabel.layer.timeOffset = self.mainTextLabel.sublabel.layer .convertTime(CACurrentMediaTime(), fromLayer: nil);
-        self.mainTextLabel.sublabel.layer.beginTime = CACurrentMediaTime();
-        self.mainTextLabel.sublabel.layer.speed = velocitySpeed
-
-        self.mainTextLabel.maskLayer?.timeOffset = (self.mainTextLabel.maskLayer?.convertTime(CACurrentMediaTime(), fromLayer: nil))!;
-        self.mainTextLabel.maskLayer?.beginTime = CACurrentMediaTime();
-        self.mainTextLabel.maskLayer?.speed = velocitySpeed
+        self.updateToSpeed(velocitySpeed)
 
     }
 
@@ -83,6 +54,8 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
         if sender.state == UIGestureRecognizerState.Began {
 
+            // do nothing
+
         }
         else if sender.state == UIGestureRecognizerState.Changed {
 
@@ -91,6 +64,8 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
             self.mainTextLabel.font = UIFont(name: (self.mainTextLabel.font?.fontName)!, size: pointSize)
 
         } else if (sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Failed) {
+
+            // do nothing
         }
 
 
@@ -99,9 +74,9 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
     @IBAction func didPan(sender: UIPanGestureRecognizer) {
 
 
-
         if sender.state == UIGestureRecognizerState.Began {
 
+            // do nothing
 
         }
         else if sender.state == UIGestureRecognizerState.Changed {
@@ -117,17 +92,8 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
             }
 
             let velocitySpeed:Float = Float(fabs(velocityX/10))
-            print(velocitySpeed)
 
-             self.mainTextLabel.sublabel.layer.timeOffset = self.mainTextLabel.sublabel.layer .convertTime(CACurrentMediaTime(), fromLayer: nil);
-            self.mainTextLabel.sublabel.layer.beginTime = CACurrentMediaTime();
-            self.mainTextLabel.sublabel.layer.speed = velocitySpeed
-
-            self.mainTextLabel.maskLayer?.timeOffset = (self.mainTextLabel.maskLayer?.convertTime(CACurrentMediaTime(), fromLayer: nil))!;
-            self.mainTextLabel.maskLayer?.beginTime = CACurrentMediaTime();
-            self.mainTextLabel.maskLayer?.speed = velocitySpeed
-
-
+            self.updateToSpeed(velocitySpeed)
             self.lastVelocitySpeed = velocitySpeed
 
 
@@ -143,27 +109,61 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
         
     }
 
-    func restartMoving() -> Void {
+    private func restartMoving() -> Void {
 
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
 
             if self.lastVelocitySpeed < 0.8 {
 
-                self.mainTextLabel.sublabel.layer.timeOffset = self.mainTextLabel.sublabel.layer .convertTime(CACurrentMediaTime(), fromLayer: nil);
-                self.mainTextLabel.sublabel.layer.beginTime = CACurrentMediaTime();
-                self.mainTextLabel.sublabel.layer.speed = 3
-
-                self.mainTextLabel.maskLayer?.timeOffset = (self.mainTextLabel.maskLayer?.convertTime(CACurrentMediaTime(), fromLayer: nil))!;
-                self.mainTextLabel.maskLayer?.beginTime = CACurrentMediaTime();
-                self.mainTextLabel.maskLayer?.speed = 3
-
-                self.lastVelocitySpeed = 3
-
+                self.updateToSpeed(1)
             }
 
 
         }
+        let delayTime1 = dispatch_time(DISPATCH_TIME_NOW, Int64(4 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime1, dispatch_get_main_queue()) {
+
+            self.updateToSpeed(2)
+            
+        }
+
+        let delayTime2 = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime2, dispatch_get_main_queue()) {
+            
+            self.updateToSpeed(3)
+        }
+    }
+
+
+    private func updateToSpeed(newSpeed:Float) -> Void {
+
+        self.mainTextLabel.sublabel.layer.timeOffset = self.mainTextLabel.sublabel.layer .convertTime(CACurrentMediaTime(), fromLayer: nil);
+        self.mainTextLabel.sublabel.layer.beginTime = CACurrentMediaTime();
+        self.mainTextLabel.sublabel.layer.speed = newSpeed
+
+        self.mainTextLabel.maskLayer?.timeOffset = (self.mainTextLabel.maskLayer?.convertTime(CACurrentMediaTime(), fromLayer: nil))!;
+        self.mainTextLabel.maskLayer?.beginTime = CACurrentMediaTime();
+        self.mainTextLabel.maskLayer?.speed = newSpeed
+
+    }
+
+
+    private func timingFunctionForAnimationCurve(curve: UIViewAnimationCurve) -> CAMediaTimingFunction {
+        let timingFunction: String?
+
+        switch curve {
+        case .EaseIn:
+            timingFunction = kCAMediaTimingFunctionEaseIn
+        case .EaseInOut:
+            timingFunction = kCAMediaTimingFunctionEaseInEaseOut
+        case .EaseOut:
+            timingFunction = kCAMediaTimingFunctionEaseOut
+        default:
+            timingFunction = kCAMediaTimingFunctionLinear
+        }
+
+        return CAMediaTimingFunction(name: timingFunction!)
     }
 
 }
