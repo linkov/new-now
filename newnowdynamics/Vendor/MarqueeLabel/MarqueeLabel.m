@@ -320,8 +320,9 @@ CGPoint MLOffsetCGPoint(CGPoint point, CGFloat offset);
         switch (self.marqueeType) {
             case MLContinuousReverse:
             case MLRightLeft:
-                CGRectDivide(self.bounds, &unusedFrame, &labelFrame, self.leadingBuffer, CGRectMaxXEdge);
-                labelFrame = CGRectIntegral(labelFrame);
+                //MARK: here or not?
+           //     CGRectDivide(self.bounds, &unusedFrame, &labelFrame, self.leadingBuffer, CGRectMaxXEdge);
+                labelFrame =  CGRectIntegral(CGRectMake(self.leadingBuffer, 0.0f, self.bounds.size.width - self.leadingBuffer, self.bounds.size.height));
                 break;
                 
             default:
@@ -353,11 +354,14 @@ CGPoint MLOffsetCGPoint(CGPoint point, CGFloat offset);
         case MLContinuousReverse:
         {
             if (self.marqueeType == MLContinuous) {
+
                 self.homeLabelFrame = CGRectIntegral(CGRectMake(self.leadingBuffer, 0.0f, expectedLabelSize.width, self.bounds.size.height));
                 self.awayOffset = -(self.homeLabelFrame.size.width + minTrailing);
+
             } else {
-                self.homeLabelFrame = CGRectIntegral(CGRectMake(self.bounds.size.width - (expectedLabelSize.width + self.leadingBuffer), 0.0f, expectedLabelSize.width, self.bounds.size.height));
-                self.awayOffset = (self.homeLabelFrame.size.width + minTrailing);
+
+                self.homeLabelFrame = CGRectIntegral(CGRectMake(self.leadingBuffer, 0.0f, expectedLabelSize.width, self.bounds.size.height));
+                self.awayOffset = -(self.homeLabelFrame.size.width + minTrailing);
             }
 
             #warning should we disable?
@@ -679,7 +683,7 @@ CGPoint MLOffsetCGPoint(CGPoint point, CGFloat offset);
 
     } else if(self.marqueeType == MLContinuousReverse ) {
 
-        homeOrigin = CGPointMake((currentPositionLayer1.x-self.awayOffset), 0);
+        homeOrigin = CGPointMake(-(fabs(self.awayOffset) - (currentPositionLayer1.x-self.awayOffset)), 0);
         awayOrigin = MLOffsetCGPoint(homeOrigin, self.awayOffset);
 
     }

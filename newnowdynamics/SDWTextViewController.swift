@@ -18,7 +18,25 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
     var previousScrollSpeed:CGFloat = 0
     let index:NSInteger = 1
     let baseText:String = " THIS VERY MOMENT HAS ALREADY BECOME THE PAST – "
+
+    @IBOutlet var scrollingView: SDWScrollTextView!
+
     @IBOutlet var mainTextLabel: MarqueeLabel!
+
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        let myMutableString:NSMutableAttributedString = NSMutableAttributedString(
+            string: baseText,
+            attributes: [NSFontAttributeName:UIFont(
+                name: "Georgia",
+                size: 18.0)!])
+
+
+        //self.view
+        self.scrollingView.setupWithAttributedText(myMutableString as NSAttributedString)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,13 +49,17 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
         self.mainTextLabel.animationDelay = 0.0
         self.mainTextLabel.speed = .Rate(10.0)
         self.mainTextLabel.triggerScrollStart()
+
+
     }
+
+
 
 
     @IBAction func didLongPress(sender: UILongPressGestureRecognizer) {
 
-        let velocitySpeed:Float = self.mainTextLabel.sublabel.layer.speed/2
-        self.updateToSpeed(velocitySpeed,shouldRestart:  true)
+        let velocitySpeed:Float = 0.0
+        self.updateToSpeed(velocitySpeed,shouldRestart:  false)
 
     }
 
@@ -152,7 +174,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
 
         if self.lastVelocitySpeed < 0.8 && shouldRestart {
-            self.restartMoving()
+           // self.restartMoving()
         }
 
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F131A7731CAAE2040020DB1D /* SDWScrollTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F131A7721CAAE2040020DB1D /* SDWScrollTextView.swift */; };
 		F1364FD01CA9700600971D2C /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F1364FCF1CA9700500971D2C /* MarqueeLabel.m */; };
 		F1364FD31CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1364FD21CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf */; };
 		F1364FD81CAA225D00971D2C /* MarqueeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1364FD71CAA225D00971D2C /* MarqueeLabel.swift */; };
@@ -26,6 +27,7 @@
 		65C96A0DF623E2B565E8A015 /* libPods-newnowdynamics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-newnowdynamics.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B3D2EC818FFDC985A0AC664 /* Pods-newnowdynamics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newnowdynamics.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newnowdynamics/Pods-newnowdynamics.debug.xcconfig"; sourceTree = "<group>"; };
 		F0967AA0702C9D45C3FCB888 /* Pods-newnowdynamics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newnowdynamics.release.xcconfig"; path = "Pods/Target Support Files/Pods-newnowdynamics/Pods-newnowdynamics.release.xcconfig"; sourceTree = "<group>"; };
+		F131A7721CAAE2040020DB1D /* SDWScrollTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWScrollTextView.swift; sourceTree = "<group>"; };
 		F1364FCB1CA87C6700971D2C /* newnowdynamics-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "newnowdynamics-Bridging-Header.h"; sourceTree = "<group>"; };
 		F1364FCE1CA9700500971D2C /* MarqueeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeLabel.h; sourceTree = "<group>"; };
 		F1364FCF1CA9700500971D2C /* MarqueeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeLabel.m; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				F1364FD71CAA225D00971D2C /* MarqueeLabel.swift */,
+				F131A7721CAAE2040020DB1D /* SDWScrollTextView.swift */,
 			);
 			path = "MarqueeLabel-Swift";
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				F13662E11CA71875005785A2 /* SDWTextViewController.swift in Sources */,
 				F1364FD81CAA225D00971D2C /* MarqueeLabel.swift in Sources */,
 				F13662E31CA7195D005785A2 /* SDWAboutViewController.swift in Sources */,
+				F131A7731CAAE2040020DB1D /* SDWScrollTextView.swift in Sources */,
 				F13662E51CA71A5E005785A2 /* SDWTextEditViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

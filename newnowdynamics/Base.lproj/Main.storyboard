@@ -33,6 +33,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dul-8f-t1W" customClass="SDWScrollTextView" customModule="New_Now">
+                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                <color key="backgroundColor" red="0.46830399992131111" green="1" blue="0.25197177022538308" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sfq-GY-frb" userLabel="textContainer">
                                 <rect key="frame" x="0.0" y="50" width="568" height="250"/>
                                 <subviews>
@@ -61,7 +65,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Sfq-GY-frb" firstAttribute="top" secondItem="dVd-Fg-nyc" secondAttribute="bottom" constant="50" id="3JW-w6-dAK"/>
+                            <constraint firstItem="dul-8f-t1W" firstAttribute="top" secondItem="dVd-Fg-nyc" secondAttribute="bottom" id="AcJ-R4-tMQ"/>
+                            <constraint firstAttribute="trailing" secondItem="dul-8f-t1W" secondAttribute="trailing" id="BxX-on-MyS"/>
                             <constraint firstItem="Sfq-GY-frb" firstAttribute="leading" secondItem="toI-7G-uIG" secondAttribute="leading" id="NNr-WH-kFn"/>
+                            <constraint firstItem="dul-8f-t1W" firstAttribute="leading" secondItem="toI-7G-uIG" secondAttribute="leading" id="OC2-Jb-HdO"/>
+                            <constraint firstItem="d6T-rS-Et5" firstAttribute="top" secondItem="dul-8f-t1W" secondAttribute="bottom" id="Sqe-Ge-23u"/>
                             <constraint firstAttribute="trailing" secondItem="Sfq-GY-frb" secondAttribute="trailing" id="ogW-4m-n6e"/>
                             <constraint firstItem="d6T-rS-Et5" firstAttribute="top" secondItem="Sfq-GY-frb" secondAttribute="bottom" constant="20" id="rYN-K6-Ghz"/>
                         </constraints>
@@ -74,6 +82,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="mainTextLabel" destination="dV6-SV-wsQ" id="Unv-zO-0NI"/>
+                        <outlet property="scrollingView" destination="dul-8f-t1W" id="10Z-gl-Olc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kKE-1Q-c20" userLabel="First Responder" sceneMemberID="firstResponder"/>
