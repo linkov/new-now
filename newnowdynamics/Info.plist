@@ -40,8 +40,6 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>ProximaNovaCondensedSemibold.otf</string>
-		<string>NeuzeitSHeavyBook.oft</string>
-		<string>RelativeMedium.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
