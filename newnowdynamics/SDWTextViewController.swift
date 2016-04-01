@@ -17,7 +17,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
     var panGestureBeganTime:NSTimeInterval = 0
     var previousScrollSpeed:CGFloat = 0
     let index:NSInteger = 1
-    let baseText:String = " THIS VERY MOMENT HAS ALREADY BECOME THE PAST – "
+    let baseText:String = " THIS NEW MOMENT HAS ALREADY BECOME THE PAST –"
     @IBOutlet var mainTextLabel: MarqueeLabel!
 
     override func viewDidLoad() {
@@ -27,10 +27,33 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
         self.mainTextLabel.text = self.baseText
         self.mainTextLabel.type = .Continuous
 
-        self.mainTextLabel.font = UIFont(name: self.mainTextLabel.font.fontName, size: 500)
+        //self.mainTextLabel.font = UIFont(name: self.mainTextLabel.font.fontName, size: 500)
         self.mainTextLabel.animationDelay = 0.0
         self.mainTextLabel.speed = .Rate(10.0)
         self.mainTextLabel.triggerScrollStart()
+
+        self.updateToSpeed(20, shouldRestart: false)
+
+//        let fontFamilyNames = UIFont.familyNames()
+//        for familyName in fontFamilyNames {
+//            print("------------------------------")
+//            print("Font Family Name = [\(familyName)]")
+//            let names = UIFont.fontNamesForFamilyName(familyName)
+//            print("Font Names = [\(names)]")
+//        }
+
+        
+        let mutableAttributedString:NSMutableAttributedString = NSMutableAttributedString(
+            string: self.baseText,
+            attributes: [NSFontAttributeName:UIFont(
+                name: "ProximaNovaCond-Semibold",
+                size: 500)!])
+
+        mutableAttributedString.addAttribute(NSKernAttributeName, value: CGFloat(1.4), range: NSRange(location: 0, length: self.baseText.characters.count))
+
+
+        //Apply to the label
+        self.mainTextLabel.attributedText = mutableAttributedString
     }
 
 
@@ -118,6 +141,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
             if self.lastVelocitySpeed < 0.8 {
 
+                self.mainTextLabel.type = .Continuous
                 self.updateToSpeed(1,shouldRestart:  false)
             }
 

@@ -82,7 +82,7 @@
                         <action selector="didPan:" destination="DaV-Wr-zW2" id="aOF-yj-OI0"/>
                     </connections>
                 </panGestureRecognizer>
-                <tapGestureRecognizer id="B8J-he-5Fz">
+                <tapGestureRecognizer numberOfTapsRequired="2" id="B8J-he-5Fz">
                     <connections>
                         <action selector="didTap:" destination="DaV-Wr-zW2" id="WFk-hp-8kf"/>
                     </connections>
