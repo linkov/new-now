@@ -19,6 +19,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
     let index:NSInteger = 1
     let baseText:String = " THIS VERY MOMENT HAS ALREADY BECOME THE PAST – "
 
+
     @IBOutlet var scrollingView: SDWScrollTextView!
 
     @IBOutlet var mainTextLabel: MarqueeLabel!
@@ -27,20 +28,21 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        let myMutableString:NSMutableAttributedString = NSMutableAttributedString(
-            string: baseText,
-            attributes: [NSFontAttributeName:UIFont(
-                name: "Georgia",
-                size: 18.0)!])
 
-
-        //self.view
-        self.scrollingView.setupWithAttributedText(myMutableString as NSAttributedString)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let myMutableString:NSMutableAttributedString = NSMutableAttributedString(
+            string: baseText,
+            attributes: [NSFontAttributeName:UIFont(
+                name: "Georgia",
+                size: 12.0)!])
+
+
+        //self.view
+        self.scrollingView.setupWithAttributedText(myMutableString as NSAttributedString)
 
         self.mainTextLabel.text = self.baseText
         self.mainTextLabel.type = .Continuous
@@ -113,16 +115,25 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
             let velocity:CGPoint = sender.velocityInView(self.view!)
             velocityX = velocity.x
 
+            let velocitySpeed:Float = Float(fabs(velocityX/10))
             if velocityX > 0 {
 
-                self.mainTextLabel.type = .ContinuousReverse
+                self.scrollingView.scrollToLeft();
+                self.scrollingView.label.layer.timeOffset = scrollingView.label.layer .convertTime(CACurrentMediaTime(), fromLayer: nil);
+                self.scrollingView.label.layer.beginTime = CACurrentMediaTime();
+                self.scrollingView.label.layer.speed = velocitySpeed
+
+
+
+
+//                self.mainTextLabel.type = .ContinuousReverse
             } else {
-                self.mainTextLabel.type = .Continuous
+               // self.mainTextLabel.type = .Continuous
             }
 
-            let velocitySpeed:Float = Float(fabs(velocityX/10))
-
-            self.updateToSpeed(velocitySpeed,shouldRestart:  true)
+//            let velocitySpeed:Float = Float(fabs(velocityX/10))
+//
+//            self.updateToSpeed(velocitySpeed,shouldRestart:  true)
 
 
 

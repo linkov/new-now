@@ -27,6 +27,11 @@ public class SDWScrollTextView: UIView {
         sdw_commonInit()
     }
 
+    public func scrollToLeft() -> Void {
+
+        self.replicatorLayer.instanceCount = 2;
+        self.replicatorLayer.instanceTransform = CATransform3DMakeTranslation(self.label.bounds.width, 0, 0);
+    }
 
 
     func sdw_commonInit() -> Void {
@@ -36,11 +41,17 @@ public class SDWScrollTextView: UIView {
         self.replicatorLayer.frame = self.bounds
 
         self.label = UILabel(frame: self.bounds)
-        self.addSubview(self.label)
+
         self.label.attributedText = self.attributedText
 
         let options: NSStringDrawingOptions = [.UsesLineFragmentOrigin, .UsesFontLeading]
         let textFrame:CGRect = self.attributedText.boundingRectWithSize(self.bounds.size, options: options, context: nil)
+        self.label.frame = CGRectMake(0, 0, textFrame.width, textFrame.height)
+
+        self.replicatorLayer.instanceCount = 2;
+        self.replicatorLayer.instanceTransform = CATransform3DMakeTranslation(self.label.bounds.width, 0, 0);
+
+        self.replicatorLayer.addSublayer(self.label.layer)
 
         print(textFrame)
 
