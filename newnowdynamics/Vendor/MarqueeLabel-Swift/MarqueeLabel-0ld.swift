@@ -8,7 +8,6 @@
 import UIKit
 import QuartzCore
 
-@IBDesignable
 
 public class MarqueeLabel: UILabel {
     
@@ -33,18 +32,19 @@ public class MarqueeLabel: UILabel {
     
     /**
      Defines the direction and method in which the `MarqueeLabel` instance scrolls.
-     `MarqueeLabel` supports four types of scrolling: `LeftRight`, `RightLeft`, `Continuous`, and `ContinuousReverse`.
+     `MarqueeLabel` supports four types of scrolling: `MLLeftRight`, `MLRightLeft`, `MLContinuous`, and `MLContinuousReverse`.
      
-     Given the nature of how text direction works, the options for the `type` property require specific text alignments
+     Given the nature of how text direction works, the options for the `marqueeType` property require specific text alignments
      and will set the textAlignment property accordingly.
      
-     - `LeftRight` type is ONLY compatible with a label text alignment of `NSTextAlignmentLeft`.
-     - `RightLeft` type is ONLY compatible with a label text alignment of `NSTextAlignmentRight`.
-     - `Continuous` does not require a text alignment (it is effectively centered).
-     - `ContinuousReverse` does not require a text alignment (it is effectively centered).
+     - `MLLeftRight` type is ONLY compatible with a label text alignment of `NSTextAlignmentLeft`.
+     - `MLRightLeft` type is ONLY compatible with a label text alignment of `NSTextAlignmentRight`.
+     - `MLContinuous` does not require a text alignment (it is effectively centered).
+     - `MLContinuousReverse` does not require a text alignment (it is effectively centered).
      
-     Defaults to `Continuous`.
+     Defaults to `MLContinuous`.
      
+     - SeeAlso: Type
      - SeeAlso: textAlignment
      */
     public var type: Type = .Continuous {
@@ -82,7 +82,7 @@ public class MarqueeLabel: UILabel {
      
      - SeeAlso: holdScrolling
      - SeeAlso: lineBreakMode
-     @warning The label will not automatically scroll when this property is set to `true`.
+     @warning The label will not automatically scroll when this property is set to `YES`.
      @warning The UILabel default setting for the `lineBreakMode` property is `NSLineBreakByTruncatingTail`, which truncates
      the text adds an ellipsis glyph (...). Set the `lineBreakMode` property to `NSLineBreakByClipping` in order to avoid the
      ellipsis, especially if using an edge transparency fade.
@@ -106,7 +106,7 @@ public class MarqueeLabel: UILabel {
      Defaults to `false`.
      
      - SeeAlso: labelize
-     @warning The label will not automatically scroll when this property is set to `true`.
+     @warning The label will not automatically scroll when this property is set to `YES`.
      */
     @IBInspectable public var holdScrolling: Bool = false {
         didSet {
@@ -210,29 +210,35 @@ public class MarqueeLabel: UILabel {
         }
     }
     
-    @available(*, deprecated = 2.6, message = "Use speed property instead")
-    @IBInspectable public var scrollDuration: CGFloat {
+    // @available attribute seems to cause SourceKit to crash right now
+    // @available(*, deprecated = 2.6, message = "Use speed property instead")
+    @IBInspectable public var scrollDuration: CGFloat? {
         get {
             switch speed {
             case .Duration(let duration): return duration
-            case .Rate(_): return 0.0
+            case .Rate(_): return nil
             }
         }
         set {
-            speed = .Duration(newValue)
+            if let duration = newValue {
+                speed = .Duration(duration)
+            }
         }
     }
     
-    @available(*, deprecated = 2.6, message = "Use speed property instead")
-    @IBInspectable public var scrollRate: CGFloat {
+    // @available attribute seems to cause SourceKit to crash right now
+    // @available(*, deprecated = 2.6, message = "Use speed property instead")
+    @IBInspectable public var scrollRate: CGFloat? {
         get {
             switch speed {
-            case .Duration(_): return 0.0
+            case .Duration(_): return nil
             case .Rate(let rate): return rate
             }
         }
         set {
-            speed = .Rate(newValue)
+            if let rate = newValue {
+                speed = .Rate(rate)
+            }
         }
     }
     
@@ -296,7 +302,7 @@ public class MarqueeLabel: UILabel {
     @IBInspectable public var fadeLength: CGFloat = 0.0 {
         didSet {
             if fadeLength != oldValue {
-//                applyGradientMask(fadeLength, animated: true)
+                applyGradientMask(fadeLength, animated: true)
                 updateAndScroll()
             }
         }
@@ -444,6 +450,7 @@ public class MarqueeLabel: UILabel {
         addSubview(sublabel)
         
         // Configure self
+        super.backgroundColor = UIColor.clearColor()
         super.clipsToBounds = true
         super.numberOfLines = 1
         
@@ -459,12 +466,6 @@ public class MarqueeLabel: UILabel {
     
     override public func awakeFromNib() {
         super.awakeFromNib()
-        forwardPropertiesToSublabel()
-    }
-    
-    @available(iOS 8.0, *)
-    public override func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
         forwardPropertiesToSublabel()
     }
     
@@ -488,7 +489,7 @@ public class MarqueeLabel: UILabel {
         sublabel.textColor = super.textColor
         sublabel.backgroundColor = super.backgroundColor ?? UIColor.clearColor()
         sublabel.shadowColor = super.shadowColor
-        sublabel.shadowOffset = super.shadowOffset
+        sublabel.shadowOffset = super.shadowOffset;
         for prop in properties {
             let value: AnyObject! = super.valueForKey(prop)
             sublabel.setValue(value, forKeyPath: prop)
@@ -560,13 +561,13 @@ public class MarqueeLabel: UILabel {
             awayOffset = 0.0
             
             // Remove an additional sublabels (for continuous types)
-            repliLayer?.instanceCount = 1;
+            repliLayer.instanceCount = 1;
             
             // Set the sublabel frame to calculated labelFrame
             sublabel.frame = labelFrame
             
-            // Remove fade, as by definition none is needed in this case
-            removeGradientMask()
+            // Configure fade
+            applyGradientMask(fadeLength, animated: !labelize)
             
             return
         }
@@ -578,11 +579,6 @@ public class MarqueeLabel: UILabel {
         
         switch type {
         case .Continuous, .ContinuousReverse:
-
-
-//            print("repli pos-")
-//            print(repliLayer)
-
             if (type == .Continuous) {
                 homeLabelFrame = CGRectIntegral(CGRectMake(leadingBuffer, 0.0, expectedLabelSize.width, bounds.size.height))
                 awayOffset = -(homeLabelFrame.size.width + minTrailing)
@@ -595,8 +591,8 @@ public class MarqueeLabel: UILabel {
             sublabel.frame = homeLabelFrame
             
             // Configure replication
-            repliLayer?.instanceCount = 2
-            repliLayer?.instanceTransform = CATransform3DMakeTranslation(-awayOffset, 0.0, 0.0)
+            repliLayer.instanceCount = 2
+            repliLayer.instanceTransform = CATransform3DMakeTranslation(-awayOffset, 0.0, 0.0)
         
         case .RightLeft:
             homeLabelFrame = CGRectIntegral(CGRectMake(bounds.size.width - (expectedLabelSize.width + leadingBuffer), 0.0, expectedLabelSize.width, bounds.size.height))
@@ -606,7 +602,7 @@ public class MarqueeLabel: UILabel {
             sublabel.frame = homeLabelFrame
             
             // Remove any replication
-            repliLayer?.instanceCount = 1
+            repliLayer.instanceCount = 1
             
             // Enforce text alignment for this type
             sublabel.textAlignment = NSTextAlignment.Right
@@ -619,7 +615,7 @@ public class MarqueeLabel: UILabel {
             sublabel.frame = homeLabelFrame
             
             // Remove any replication
-            repliLayer?.instanceCount = 1
+            self.repliLayer.instanceCount = 1
             
             // Enforce text alignment for this type
             sublabel.textAlignment = NSTextAlignment.Left
@@ -638,8 +634,8 @@ public class MarqueeLabel: UILabel {
         }()
         
         // Configure gradient for current condition
-//        applyGradientMask(fadeLength, animated: !labelize)
-
+        applyGradientMask(fadeLength, animated: !self.labelize)
+        
         if !tapToScroll && !holdScrolling && shouldBeginScroll {
             beginScroll()
         }
@@ -650,14 +646,8 @@ public class MarqueeLabel: UILabel {
         let maximumLabelSize = CGSizeMake(CGFloat.max, CGFloat.max)
         // Calculate the expected size
         var expectedLabelSize = sublabel.sizeThatFits(maximumLabelSize)
-        
-        #if os(tvOS)
-            // Sanitize width to 16384.0 (largest width a UILabel will draw on tvOS)
-            expectedLabelSize.width = min(expectedLabelSize.width, 16384.0)
-        #else
-            // Sanitize width to 5461.0 (largest width a UILabel will draw on an iPhone 6S Plus)
-            expectedLabelSize.width = min(expectedLabelSize.width, 5461.0)
-        #endif
+        // Sanitize width to 5461.0 (largest width a UILabel will draw on an iPhone 6S Plus)
+        expectedLabelSize.width = min(expectedLabelSize.width, 15461.0)
 
         // Adjust to own height (make text baseline match normal label)
         expectedLabelSize.height = bounds.size.height
@@ -687,8 +677,7 @@ public class MarqueeLabel: UILabel {
         
         // Check if the label string fits
         let labelTooLarge = (sublabelSize().width + leadingBuffer) > self.bounds.size.width
-        let animationHasDuration = speed.value > 0.0
-        return (!labelize && labelTooLarge && animationHasDuration)
+        return (!labelize && labelTooLarge)
     }
     
     private func labelReadyForScroll() -> Bool {
@@ -717,11 +706,10 @@ public class MarqueeLabel: UILabel {
         beginScroll(true)
     }
     
-    public func beginScroll(delay: Bool) {
+    private func beginScroll(delay: Bool) {
         switch self.type {
         case .LeftRight, .RightLeft:
-            print("FU")
-//            scrollAway(animationDuration, delay: animationDelay)
+            scrollAway(animationDuration, delay: animationDelay)
         default:
             scrollContinuous(animationDuration, delay: animationDelay)
         }
@@ -734,6 +722,9 @@ public class MarqueeLabel: UILabel {
         // Remove all sublabel position animations
         sublabel.layer.removeAllAnimations()
     }
+    
+    // Define animation completion closure type
+    private typealias MLAnimationCompletion = (finished: Bool) -> ()
     
     private func scroll(interval: CGFloat, delay: CGFloat = 0.0, scroller: Scroller, fader: CAKeyframeAnimation?) {
         var scroller = scroller
@@ -752,64 +743,55 @@ public class MarqueeLabel: UILabel {
         
         // Create gradient animation, if needed
         let gradientAnimation: CAKeyframeAnimation?
-        // Check for IBDesignable
-        #if !TARGET_INTERFACE_BUILDER
-            if fadeLength > 0.0 {
-                // Remove any setup animation, but apply final values
-                if let setupAnim = maskLayer?.animationForKey("setupFade") as? CABasicAnimation, finalColors = setupAnim.toValue as? [CGColorRef] {
-                    maskLayer?.colors = finalColors
-                }
-                maskLayer?.removeAnimationForKey("setupFade")
-                
-                // Generate animation if needed
-                if let previousAnimation = fader {
-                    gradientAnimation = previousAnimation
-                } else {
-                    gradientAnimation = keyFrameAnimationForGradient(fadeLength, interval: interval, delay: delay)
-                }
-                
-                // Apply scrolling animation
-                maskLayer?.addAnimation(gradientAnimation!, forKey: "gradient")
-            } else {
-                // No animation needed
-                gradientAnimation = nil
+        if fadeLength > 0.0 {
+            // Remove any setup animation, but apply final values
+            if let setupAnim = maskLayer?.animationForKey("setupFade") as? CABasicAnimation, finalColors = setupAnim.toValue as? [CGColorRef] {
+                maskLayer?.colors = finalColors
             }
-        #else
-            gradientAnimation = nil;
-        #endif
+            maskLayer?.removeAnimationForKey("setupFade")
+            
+            // Generate animation if needed
+            if let previousAnimation = fader {
+                gradientAnimation = previousAnimation
+            } else {
+                gradientAnimation = keyFrameAnimationForGradient(fadeLength, interval: interval, delay: delay)
+            }
+            
+            // Apply scrolling animation
+            maskLayer?.addAnimation(gradientAnimation!, forKey: "gradient")
+        } else {
+            // No animation needed
+            gradientAnimation = nil
+        }
         
-        scrollCompletionBlock = { [weak self] (finished: Bool) -> () in
+        let completion = CompletionBlock<MLAnimationCompletion>({ (finished: Bool) -> () in
             guard finished else {
                 // Do not continue into the next loop
                 return
             }
             
-            guard (self != nil) else {
-                return
-            }
-            
             // Call returned home function
-            self!.labelReturnedToHome(true)
+            self.labelReturnedToHome(true)
             
             // Check to ensure that:
             // 1) We don't double fire if an animation already exists
             // 2) The instance is still attached to a window - this completion block is called for
             //    many reasons, including if the animation is removed due to the view being removed
             //    from the UIWindow (typically when the view controller is no longer the "top" view)
-            guard self!.window != nil else {
+            guard self.window != nil else {
                 return
             }
             
-            guard self!.sublabel.layer.animationForKey("position") == nil else {
+            guard self.sublabel.layer.animationForKey("position") == nil else {
                 return
             }
             
             // Begin again, if conditions met
-            if (self!.labelShouldScroll() && !self!.tapToScroll && !self!.holdScrolling) {
+            if (self.labelShouldScroll() && !self.tapToScroll && !self.holdScrolling) {
                 // Perform completion callback
-                self!.scroll(interval, delay: delay, scroller: scroller, fader: gradientAnimation)
+                self.scroll(interval, delay: delay, scroller: scroller, fader: gradientAnimation)
             }
-        }
+        })
         
         // Call scroller
         let scrolls = scroller.generate(interval, delay: delay)
@@ -821,7 +803,7 @@ public class MarqueeLabel: UILabel {
             
             // Add callback to single animation
             if index == 0 {
-                anim.setValue(true, forKey: MarqueeKeys.CompletionClosure.rawValue)
+                anim.setValue(completion as AnyObject, forKey: MarqueeKeys.CompletionClosure.rawValue)
                 anim.delegate = self
             }
             
@@ -832,45 +814,36 @@ public class MarqueeLabel: UILabel {
         CATransaction.commit()
     }
     
-//    private func scrollAway(interval: CGFloat, delay: CGFloat = 0.0) {
-//        // Create scroller, which defines the animation to perform
-//        let homeOrigin = homeLabelFrame.origin
-//        let awayOrigin = offsetCGPoint(homeLabelFrame.origin, offset: awayOffset)
-//        let scroller = Scroller(generator: { [unowned self] (interval: CGFloat, delay: CGFloat) -> [(layer: CALayer, anim: CAKeyframeAnimation)] in
-//            // Create animation for position
-//            let values: [NSValue] = [
-//                NSValue(CGPoint: homeOrigin), // Start at home
-//                NSValue(CGPoint: homeOrigin), // Stay at home for delay
-//                NSValue(CGPoint: awayOrigin), // Move to away
-//                NSValue(CGPoint: awayOrigin), // Stay at away for delay
-//                NSValue(CGPoint: homeOrigin)  // Move back to home
-//            ]
-//            
-//            let layer = self.sublabel.layer
-//            let anim = self.keyFrameAnimationForProperty("position", values: values, interval: interval, delay: delay)
-//            
-//            return [(layer: layer, anim: anim)]
-//        })
-//        
-//        // Scroll
-//        scroll(interval, delay: delay, scroller: scroller, fader: nil)
-//    }
+    private func scrollAway(interval: CGFloat, delay: CGFloat = 0.0) {
+        // Create scroller, which defines the animation to perform
+        let homeOrigin = homeLabelFrame.origin
+        let awayOrigin = offsetCGPoint(homeLabelFrame.origin, offset: awayOffset)
+        let scroller = Scroller(generator: {(interval: CGFloat, delay: CGFloat) -> [(layer: CALayer, anim: CAKeyframeAnimation)] in
+            // Create animation for position
+            let values: [NSValue] = [
+                NSValue(CGPoint: homeOrigin), // Start at home
+                NSValue(CGPoint: homeOrigin), // Stay at home for delay
+                NSValue(CGPoint: awayOrigin), // Move to away
+                NSValue(CGPoint: awayOrigin), // Stay at away for delay
+                NSValue(CGPoint: homeOrigin)  // Move back to home
+            ]
+            
+            let layer = self.sublabel.layer
+            let anim = self.keyFrameAnimationForProperty("position", values: values, interval: interval, delay: delay)
+            
+            return [(layer: layer, anim: anim)]
+        })
+        
+        // Scroll
+        scroll(interval, delay: delay, scroller: scroller, fader: nil)
+    }
 
     
     private func scrollContinuous(interval: CGFloat, delay: CGFloat) {
         // Create scroller, which defines the animation to perform
         let homeOrigin = homeLabelFrame.origin
         let awayOrigin = offsetCGPoint(homeLabelFrame.origin, offset: awayOffset)
-
-
-//        print("home origin - ")
-//        print(homeOrigin)
-//
-//        print("awayOrigin - ")
-//        print(awayOrigin)
-
-
-        let scroller = Scroller(generator: { [unowned self] (interval: CGFloat, delay: CGFloat) -> [(layer: CALayer, anim: CAKeyframeAnimation)] in
+        let scroller = Scroller(generator: { (interval: CGFloat, delay: CGFloat) -> [(layer: CALayer, anim: CAKeyframeAnimation)] in
             // Create animation for position
             let values: [NSValue] = [
                 NSValue(CGPoint: homeOrigin), // Start at home
@@ -882,6 +855,7 @@ public class MarqueeLabel: UILabel {
             let layer = self.sublabel.layer
             let anim = self.keyFrameAnimationForProperty("position", values: values, interval: interval, delay: delay)
             
+            
             return [(layer: layer, anim: anim)]
         })
         
@@ -889,91 +863,80 @@ public class MarqueeLabel: UILabel {
         scroll(interval, delay: delay, scroller: scroller, fader: nil)
     }
     
-//    private func applyGradientMask(fadeLength: CGFloat, animated: Bool) {
-//        // Remove any in-flight animations
-//        maskLayer?.removeAllAnimations()
-//        
-//        // Check for zero-length fade
-//        if (fadeLength <= 0.0) {
-//            removeGradientMask()
-//            return
-//        }
-//        
-//        // Configure gradient mask without implicit animations
-//        CATransaction.begin()
-//        CATransaction.setDisableActions(true)
-//        
-//        // Determine if gradient mask needs to be created
-//        let gradientMask: CAGradientLayer
-//        if let currentMask = self.maskLayer {
-//            // Mask layer already configured
-//            gradientMask = currentMask
-//        } else {
-//            // No mask exists, create new mask
-//            gradientMask = CAGradientLayer()
-//            gradientMask.shouldRasterize = true
-//            gradientMask.rasterizationScale = UIScreen.mainScreen().scale
-//            gradientMask.startPoint = CGPointMake(0.0, 0.5)
-//            gradientMask.endPoint = CGPointMake(1.0, 0.5)
-//        }
-//        
-//        // Check if there is a mask to layer size mismatch
-//        if gradientMask.bounds != self.layer.bounds {
-//            // Adjust stops based on fade length
-//            let leftFadeStop = fadeLength/self.bounds.size.width
-//            let rightFadeStop = fadeLength/self.bounds.size.width
-//            gradientMask.locations = [0.0, leftFadeStop, (1.0 - rightFadeStop), 1.0]
-//        }
-//        
-//        gradientMask.bounds = self.layer.bounds
-//        gradientMask.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds))
-//        
-//        // Set up colors
-//        let transparent = UIColor.clearColor().CGColor
-//        let opaque = UIColor.blackColor().CGColor
-//        
-//        // Set mask
-//        self.layer.mask = gradientMask
-//        
-//        // Determine colors for non-scrolling label (i.e. at home)
-//        let adjustedColors: [CGColorRef]
-//        let trailingFadeNeeded = self.labelShouldScroll()
-//        
-//        switch (type) {
-//        case .ContinuousReverse, .RightLeft:
-//            adjustedColors = [(trailingFadeNeeded ? transparent : opaque), opaque, opaque, opaque]
-//        
-//        // .Continuous, .LeftRight
-//        default:
-//            adjustedColors = [opaque, opaque, opaque, (trailingFadeNeeded ? transparent : opaque)]
-//            break
-//        }
-//        
-//        // Check for IBDesignable
-//        #if TARGET_INTERFACE_BUILDER
-//            gradientMask.colors = adjustedColors
-//            CATransaction.commit()
-//            return
-//        #endif
-//        
-//        if (animated) {
-//            // Finish transaction
-//            CATransaction.commit()
-//            
-//            // Create animation for color change
-//            let colorAnimation = GradientSetupAnimation(keyPath: "colors")
-//            colorAnimation.fromValue = gradientMask.colors
-//            colorAnimation.toValue = adjustedColors
-//            colorAnimation.fillMode = kCAFillModeForwards
-//            colorAnimation.removedOnCompletion = false
-//            colorAnimation.delegate = self
-//            gradientMask.addAnimation(colorAnimation, forKey: "setupFade")
-//        } else {
-//            gradientMask.colors = adjustedColors
-//            CATransaction.commit()
-//        }
-//    }
-
+    private func applyGradientMask(fadeLength: CGFloat, animated: Bool) {
+        // Remove any in-flight animations
+        maskLayer?.removeAllAnimations()
+        
+        // Check for zero-length fade
+        if (fadeLength <= 0.0) {
+            removeGradientMask()
+            return
+        }
+        
+        // Configure gradient mask without implicit animations
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        
+        // Determine if gradient mask needs to be created
+        let gradientMask: CAGradientLayer
+        if let currentMask = self.maskLayer {
+            // Mask layer already configured
+            gradientMask = currentMask
+        } else {
+            // No mask exists, create new mask
+            gradientMask = CAGradientLayer()
+            gradientMask.shouldRasterize = true
+            gradientMask.rasterizationScale = UIScreen.mainScreen().scale
+            gradientMask.startPoint = CGPointMake(0.0, 0.5)
+            gradientMask.endPoint = CGPointMake(1.0, 0.5)
+            // Adjust stops based on fade length
+            let leftFadeStop = fadeLength/self.bounds.size.width
+            let rightFadeStop = fadeLength/self.bounds.size.width
+            gradientMask.locations = [0.0, leftFadeStop, (1.0 - rightFadeStop), 1.0]
+        }
+        
+        // Set up colors
+        let transparent = UIColor.clearColor().CGColor
+        let opaque = UIColor.blackColor().CGColor
+        
+        // Set mask
+        self.layer.mask = gradientMask
+        
+        gradientMask.bounds = self.layer.bounds
+        gradientMask.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds))
+        
+        // Determine colors for non-scrolling label (i.e. at home)
+        let adjustedColors: [CGColorRef]
+        let trailingFadeNeeded = self.labelShouldScroll()
+        
+        switch (type) {
+        case .ContinuousReverse, .RightLeft:
+            adjustedColors = [(trailingFadeNeeded ? transparent : opaque), opaque, opaque, opaque]
+        
+        // .MLContinuous, .MLLeftRight
+        default:
+            adjustedColors = [opaque, opaque, opaque, (trailingFadeNeeded ? transparent : opaque)]
+            break
+        }
+        
+        if (animated) {
+            // Finish transaction
+            CATransaction.commit()
+            
+            // Create animation for color change
+            let colorAnimation = GradientAnimation(keyPath: "colors")
+            colorAnimation.fromValue = gradientMask.colors
+            colorAnimation.toValue = adjustedColors
+            colorAnimation.fillMode = kCAFillModeForwards
+            colorAnimation.removedOnCompletion = false
+            colorAnimation.delegate = self
+            gradientMask.addAnimation(colorAnimation, forKey: "setupFade")
+        } else {
+            gradientMask.colors = adjustedColors
+            CATransaction.commit()
+        }
+    }
+    
     private func removeGradientMask() {
         self.layer.mask = nil
     }
@@ -1103,7 +1066,7 @@ public class MarqueeLabel: UILabel {
         // Get timing function
         let timingFunction = timingFunctionForAnimationCurve(animationCurve)
         
-        // Calculate times based on marquee type
+        // Calculate times based on marqueeType
         let totalDuration: CGFloat
         switch (type) {
         case .LeftRight, .RightLeft:
@@ -1176,14 +1139,15 @@ public class MarqueeLabel: UILabel {
     }
     
     override public func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-        if let setupAnim = anim as? GradientSetupAnimation {
-            if let finalColors = setupAnim.toValue as? [CGColorRef] {
+        if anim is GradientAnimation {
+            if let setupAnim = maskLayer?.animationForKey("setupFade") as? CABasicAnimation, finalColors = setupAnim.toValue as? [CGColorRef] {
                 maskLayer?.colors = finalColors
             }
             // Remove regardless, since we set removeOnCompletion = false
             maskLayer?.removeAnimationForKey("setupFade")
         } else {
-            scrollCompletionBlock?(finished: flag)
+            let completion = anim.valueForKey(MarqueeKeys.CompletionClosure.rawValue) as? CompletionBlock<MLAnimationCompletion>
+            completion?.f(finished: flag)
         }
     }
     
@@ -1202,25 +1166,17 @@ public class MarqueeLabel: UILabel {
         return CAReplicatorLayer.self
     }
     
-    public weak var repliLayer: CAReplicatorLayer? {
-        return self.layer as? CAReplicatorLayer
+    private var repliLayer: CAReplicatorLayer {
+        return self.layer as! CAReplicatorLayer
     }
     
-    public weak var maskLayer: CAGradientLayer? {
+    public var maskLayer: CAGradientLayer? {
         return self.layer.mask as! CAGradientLayer?
     }
-    
-    private var scrollCompletionBlock: MLAnimationCompletionBlock?
     
     override public func drawLayer(layer: CALayer, inContext ctx: CGContext) {
         // Do NOT call super, to prevent UILabel superclass from drawing into context
         // Label drawing is handled by sublabel and CAReplicatorLayer layer class
-        
-        // Draw only background color
-        if let bgColor = backgroundColor {
-            CGContextSetFillColorWithColor(ctx, bgColor.CGColor);
-            CGContextFillRect(ctx, layer.bounds);
-        }
     }
     
     private enum MarqueeKeys: String {
@@ -1327,7 +1283,7 @@ public class MarqueeLabel: UILabel {
         // Bring label to home location
         returnLabelToHome()
         // Apply gradient mask for home location
-//        applyGradientMask(fadeLength, animated: false)
+        applyGradientMask(fadeLength, animated: false)
     }
     
     /**
@@ -1411,10 +1367,6 @@ public class MarqueeLabel: UILabel {
      */
     public func labelReturnedToHome(finished: Bool) {
         // Default implementation does nothing - override to customize
-
-
-
-
         return
     }
     
@@ -1427,12 +1379,11 @@ public class MarqueeLabel: UILabel {
         // Use subLabel view for handling baseline layouts
         return sublabel
     }
-    
-    public override var viewForLastBaselineLayout: UIView {
-        // Use subLabel view for handling baseline layouts
-        return sublabel
-    }
     #endif
+
+    override public func drawRect(rect: CGRect) {
+        // Draw NOTHING to prevent superclass drawing
+    }
 
     public override var text: String? {
         get {
@@ -1575,7 +1526,7 @@ public class MarqueeLabel: UILabel {
         
         set {
             // By the nature of MarqueeLabel, this is false
-            super.adjustsFontSizeToFitWidth = false
+            self.adjustsFontSizeToFitWidth = false
         }
     }
     
@@ -1585,7 +1536,7 @@ public class MarqueeLabel: UILabel {
         }
         
         set {
-            super.minimumScaleFactor = 0.0
+            self.minimumScaleFactor = 0.0
         }
     }
     
@@ -1622,6 +1573,7 @@ public class MarqueeLabel: UILabel {
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
+    
 }
 
 
@@ -1629,16 +1581,20 @@ public class MarqueeLabel: UILabel {
 // MARK: - Support
 //
 
-// Define animation completion closure type
-private typealias MLAnimationCompletionBlock = (finished: Bool) -> ()
+// Solution from: http://stackoverflow.com/a/24760061/580913
+private class CompletionBlock<T> {
+    let f : T
+    init (_ f: T) { self.f = f }
+}
 
-private class GradientSetupAnimation: CABasicAnimation {
+private class GradientAnimation: CABasicAnimation {
+    
 }
 
 private struct Scroller {
     typealias Scroll = (layer: CALayer, anim: CAKeyframeAnimation)
     
-    init(generator gen: (interval: CGFloat, delay: CGFloat) -> [Scroll]) {
+    init(generator gen: (interval: CGFloat, delay: CGFloat) -> [Scroll], scrolls: [Scroll]? = nil) {
         self.generator = gen
     }
     
