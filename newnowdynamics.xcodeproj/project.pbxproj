@@ -407,13 +407,13 @@
 			baseConfigurationReference = 8B3D2EC818FFDC985A0AC664 /* Pods-newnowdynamics.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Black";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alexey Linkov (65MXK9YDRX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexey Linkov (65MXK9YDRX)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Alexey Linkov (43R88X5B35)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alexey Linkov (43R88X5B35)";
 				INFOPLIST_FILE = newnowdynamics/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sdwr.newnow;
 				PRODUCT_NAME = "New Now";
-				PROVISIONING_PROFILE = "912134fe-878d-446d-861f-5fe87e4739bd";
+				PROVISIONING_PROFILE = "5b3c8135-cfe3-4f1a-ac81-5886f6276eee";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "newnowdynamics/newnowdynamics-Bridging-Header.h";
 			};
@@ -424,13 +424,13 @@
 			baseConfigurationReference = F0967AA0702C9D45C3FCB888 /* Pods-newnowdynamics.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Black";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alexey Linkov (65MXK9YDRX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexey Linkov (65MXK9YDRX)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Alexey Linkov (43R88X5B35)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alexey Linkov (43R88X5B35)";
 				INFOPLIST_FILE = newnowdynamics/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sdwr.newnow;
 				PRODUCT_NAME = "New Now";
-				PROVISIONING_PROFILE = "912134fe-878d-446d-861f-5fe87e4739bd";
+				PROVISIONING_PROFILE = "5b3c8135-cfe3-4f1a-ac81-5886f6276eee";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "newnowdynamics/newnowdynamics-Bridging-Header.h";
 			};
