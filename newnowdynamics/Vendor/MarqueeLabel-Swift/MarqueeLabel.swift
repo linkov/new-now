@@ -600,12 +600,40 @@ public class MarqueeLabel: UILabel {
             if (type == .Continuous) {
                 homeLabelFrame = CGRectIntegral(CGRectMake(leadingBuffer, 0.0, expectedLabelSize.width, bounds.size.height))
 
+                print("call Continuous")
+                print("homeLabelFrame")
+                print(homeLabelFrame)
+                print("lastXoffset")
+                print(lastXoffset)
                 awayOffset = -(homeLabelFrame.size.width + minTrailing)
-                homeLabelFrame = CGRectOffset(homeLabelFrame, -abs(lastXoffset), 0)
+
+
+
+
+//                if (lastXoffset > 0) {
+//
+//
+//
+//                    calculatedDevider = ( abs(lastXoffset) / (bounds.size.width - (expectedLabelSize.width + leadingBuffer)) )
+//
+//
+//                    var realOffset:CGFloat = 0
+//                    realOffset = ( 0.0 + ( abs(lastXoffset) /  abs(calculatedDevider) ) )
+//                    calculatedRect = CGRectMake( realOffset  , 0.0, expectedLabelSize.width, bounds.size.height)
+//                    homeLabelFrame = CGRectIntegral(calculatedRect)
+//
+//
+//                } else {
+//                            homeLabelFrame = CGRectOffset(homeLabelFrame, -abs(lastXoffset), 0)
+//                }
+
+                 homeLabelFrame = CGRectOffset(homeLabelFrame, -abs(lastXoffset), 0)
+
 
 
             } else { // .ContinuousReverse
 
+                print("call ContinuousReverse")
 
                 homeLabelFrame = CGRectIntegral(CGRectMake(bounds.size.width - (expectedLabelSize.width + leadingBuffer), 0.0, expectedLabelSize.width, bounds.size.height))
                 awayOffset = (homeLabelFrame.size.width + minTrailing)
@@ -616,13 +644,23 @@ public class MarqueeLabel: UILabel {
 
 
                 var realOffset:CGFloat = 0
-                if (abs(lastXoffset) <= expectedLabelSize.width) {
+                if (abs(lastXoffset) <= (expectedLabelSize.width)) {
 
-                    realOffset = -abs(lastXoffset)
+
+
+                    if (abs(lastXoffset) <= (expectedLabelSize.width) && abs(lastXoffset) > (expectedLabelSize.width - bounds.size.width )) {
+
+                        realOffset = abs(lastXoffset) - abs(expectedLabelSize.width - bounds.size.width )
+
+                    } else {
+                        realOffset = -abs(lastXoffset)
+                    }
+
+
                     calculatedDevider = 1
                 } else {
 
-                    realOffset = ( (-4794) + ( abs(lastXoffset) /  abs(calculatedDevider) ) )
+                    realOffset = ( (bounds.size.width - (expectedLabelSize.width + leadingBuffer)) + ( abs(lastXoffset) /  abs(calculatedDevider) ) )
                 }
 
                 calculatedRect = CGRectMake( realOffset  , 0.0, expectedLabelSize.width, bounds.size.height)
@@ -702,7 +740,7 @@ public class MarqueeLabel: UILabel {
             expectedLabelSize.width = min(expectedLabelSize.width, 16384.0)
         #else
             // Sanitize width to 5461.0 (largest width a UILabel will draw on an iPhone 6S Plus)
-            expectedLabelSize.width = min(expectedLabelSize.width, 5461.0)
+            expectedLabelSize.width = min(expectedLabelSize.width, 15461.0)
         #endif
 
         // Adjust to own height (make text baseline match normal label)

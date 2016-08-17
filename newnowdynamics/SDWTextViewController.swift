@@ -33,7 +33,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
         self.mainTextLabel.text = self.baseText
         self.mainTextLabel.type = .Continuous
 
-        self.mainTextLabel.font = UIFont(name: self.mainTextLabel.font.fontName, size: 250)
+        self.mainTextLabel.font = UIFont(name: self.mainTextLabel.font.fontName, size: 300)
         self.mainTextLabel.animationDelay = 0.0
         self.mainTextLabel.speed = .Rate(10.0)
         self.mainTextLabel.triggerScrollStart()
@@ -42,7 +42,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
         self.view.backgroundColor = UIColor.blackColor()
         self.mainTextLabel.textColor = UIColor.whiteColor()
-        self.updateToSpeed(50,shouldRestart:  true)
+        self.updateToSpeed(30,shouldRestart:  true)
 
 
     }
