@@ -14,6 +14,8 @@
 		F13662E31CA7195D005785A2 /* SDWAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13662E21CA7195D005785A2 /* SDWAboutViewController.swift */; };
 		F13662E51CA71A5E005785A2 /* SDWTextEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13662E41CA71A5E005785A2 /* SDWTextEditViewController.swift */; };
 		F13662E71CA727F5005785A2 /* SDWPagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13662E61CA727F5005785A2 /* SDWPagable.swift */; };
+		F1D5A0E71D6CFC5000D1F155 /* SDWOnboardPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5A0E61D6CFC5000D1F155 /* SDWOnboardPageViewController.swift */; };
+		F1D5A0E91D6CFCEC00D1F155 /* SDWOnboardContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5A0E81D6CFCEC00D1F155 /* SDWOnboardContentViewController.swift */; };
 		F1F13FFE1D3C47C900397350 /* MarqueeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F13FFD1D3C47C900397350 /* MarqueeLabel.swift */; };
 		F1F508241CA4A8BE00F1189B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F508231CA4A8BE00F1189B /* AppDelegate.swift */; };
 		F1F508261CA4A8BE00F1189B /* SDWMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F508251CA4A8BE00F1189B /* SDWMainController.swift */; };
@@ -36,6 +38,9 @@
 		F13662E21CA7195D005785A2 /* SDWAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWAboutViewController.swift; sourceTree = "<group>"; };
 		F13662E41CA71A5E005785A2 /* SDWTextEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWTextEditViewController.swift; sourceTree = "<group>"; };
 		F13662E61CA727F5005785A2 /* SDWPagable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWPagable.swift; sourceTree = "<group>"; };
+		F1D5A0E51D6CE97F00D1F155 /* RelativeBook.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RelativeBook.ttf; sourceTree = "<group>"; };
+		F1D5A0E61D6CFC5000D1F155 /* SDWOnboardPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWOnboardPageViewController.swift; sourceTree = "<group>"; };
+		F1D5A0E81D6CFCEC00D1F155 /* SDWOnboardContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWOnboardContentViewController.swift; sourceTree = "<group>"; };
 		F1F13FFD1D3C47C900397350 /* MarqueeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarqueeLabel.swift; sourceTree = "<group>"; };
 		F1F508201CA4A8BE00F1189B /* New Now.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Now.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1F508231CA4A8BE00F1189B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				F1364FD21CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf */,
+				F1D5A0E51D6CE97F00D1F155 /* RelativeBook.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -135,9 +141,11 @@
 			isa = PBXGroup;
 			children = (
 				F1F508231CA4A8BE00F1189B /* AppDelegate.swift */,
+				F1D5A0E61D6CFC5000D1F155 /* SDWOnboardPageViewController.swift */,
 				F1F508251CA4A8BE00F1189B /* SDWMainController.swift */,
 				F13662E61CA727F5005785A2 /* SDWPagable.swift */,
 				F13662E01CA71875005785A2 /* SDWTextViewController.swift */,
+				F1D5A0E81D6CFCEC00D1F155 /* SDWOnboardContentViewController.swift */,
 				F1364FCB1CA87C6700971D2C /* newnowdynamics-Bridging-Header.h */,
 				F13662E21CA7195D005785A2 /* SDWAboutViewController.swift */,
 				F13662E41CA71A5E005785A2 /* SDWTextEditViewController.swift */,
@@ -287,12 +295,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1D5A0E71D6CFC5000D1F155 /* SDWOnboardPageViewController.swift in Sources */,
 				F1F13FFE1D3C47C900397350 /* MarqueeLabel.swift in Sources */,
 				F1F508261CA4A8BE00F1189B /* SDWMainController.swift in Sources */,
 				F13662E71CA727F5005785A2 /* SDWPagable.swift in Sources */,
 				F1F508241CA4A8BE00F1189B /* AppDelegate.swift in Sources */,
 				F1364FD01CA9700600971D2C /* MarqueeLabel.m in Sources */,
 				F13662E11CA71875005785A2 /* SDWTextViewController.swift in Sources */,
+				F1D5A0E91D6CFCEC00D1F155 /* SDWOnboardContentViewController.swift in Sources */,
 				F13662E31CA7195D005785A2 /* SDWAboutViewController.swift in Sources */,
 				F131A7731CAAE2040020DB1D /* SDWScrollTextView.swift in Sources */,
 				F13662E51CA71A5E005785A2 /* SDWTextEditViewController.swift in Sources */,

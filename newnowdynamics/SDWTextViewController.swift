@@ -14,7 +14,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
 
     var lastTimeOffset: CFTimeInterval = 0
-
+    var delegate:SDWMainController?
 
     var lastSpeedBeforeDirectionChange:Float = 0
     var pinchFontBeginSpeed:Float!
@@ -25,6 +25,31 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
     let index:NSInteger = 1
     let baseText:String = " THIS VERY MOMENT HAS ALREADY BECOME THE PAST – "
     @IBOutlet var mainTextLabel: MarqueeLabel!
+
+
+
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.updateToSpeed(0.0, shouldRestart: false)
+//        self.mainTextLabel.pauseLabel()
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+//        self.mainTextLabel.unpauseLabel()
+
+
+        if (self.mainTextLabel.type == .ContinuousReverse) {
+            self.mainTextLabel.type = .ContinuousReverse
+        } else {
+            self.mainTextLabel.type = .Continuous
+        }
+
+        
+
+
+
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,10 +85,14 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
         if self.view.backgroundColor == UIColor.blackColor() {
             self.view.backgroundColor = UIColor.whiteColor()
             self.mainTextLabel.textColor = UIColor.blackColor()
+
+
         } else {
             self.view.backgroundColor = UIColor.blackColor()
             self.mainTextLabel.textColor = UIColor.whiteColor()
         }
+
+        self.delegate!.didChangeTextToColor(self.mainTextLabel.textColor)
     }
 
     @IBAction func didPinch(sender: UIPinchGestureRecognizer) {
@@ -125,30 +154,20 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
         else if sender.state == UIGestureRecognizerState.Changed {
 
 
-//            print(self.mainTextLabel.sublabel.layer.timeOffset)
-
             let velocity:CGPoint = sender.velocityInView(self.view!)
             velocityX = velocity.x
             let velocitySpeed:Float = Float(fabs(velocityX/10))
 
             lastSpeedBeforeDirectionChange = velocitySpeed
-//            var resultingSpeed:Float = 0.0
-
-//            lastTimeOffset = self.mainTextLabel.sublabel.layer.timeOffset
 
 
             if velocityX > 0 {
 
-                        self.mainTextLabel.type = .ContinuousReverse
-
-
-  //              resultingSpeed = -velocitySpeed;
-
+                self.mainTextLabel.type = .ContinuousReverse
 
             } else {
+                self.mainTextLabel.type = .Continuous
 
-                        self.mainTextLabel.type = .Continuous
-    //            resultingSpeed = velocitySpeed;
             }
 
 

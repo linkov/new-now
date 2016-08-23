@@ -1,17 +1,14 @@
 //
-//  SDWTextEditViewController.swift
+//  SDWOnboardPageViewController.swift
 //  newnowdynamics
 //
-//  Created by alex on 3/26/16.
+//  Created by alex on 8/23/16.
 //  Copyright © 2016 SDWR. All rights reserved.
 //
 
 import UIKit
 
-class SDWTextEditViewController: UIViewController, SDWPageable {
-
-    let index:NSInteger = 2
-    var currentColor:UIColor = UIColor.whiteColor()
+class SDWOnboardPageViewController: UIPageViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,26 +16,9 @@ class SDWTextEditViewController: UIViewController, SDWPageable {
         // Do any additional setup after loading the view.
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if (currentColor == UIColor.blackColor()) {
-
-            self.view.backgroundColor = UIColor.whiteColor()
-        } else {
-            self.view.backgroundColor = UIColor.blackColor()
-        }
-        
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    func changeTextColor(color:UIColor) -> Void {
-
-        currentColor = color
     }
     
 
