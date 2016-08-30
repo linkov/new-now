@@ -8,5 +8,6 @@ pod 'Fabric'
 pod 'Crashlytics'
 pod 'PureLayout'
 pod 'SVProgressHUD'
+pod 'TAPageControl'
 end
 

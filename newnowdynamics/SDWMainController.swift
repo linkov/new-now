@@ -9,14 +9,18 @@
 import UIKit
 
 
-class SDWMainController: UIViewController, UIPageViewControllerDataSource {
+class SDWMainController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 
     var pageViewController:UIPageViewController!
-    var onboardPageViewController:UIPageViewController!
+    var onboardPageViewController:SDWOnboardPageViewController!
 
     var textViewController:SDWTextViewController!
     var aboutViewController:SDWAboutViewController!
     var textEditViewController:SDWTextEditViewController!
+    var onboardingControllers:[UIViewController]!
+
+    var pendingIndex:Int?
+    var currentIndex:Int?
 
 
     override func viewDidLoad() {
@@ -24,6 +28,7 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource {
 
         self.textEditViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWTextEditViewController") as! SDWTextEditViewController
         self.aboutViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWAboutViewController") as! SDWAboutViewController
+        self.aboutViewController.delegate = self
         self.textViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWTextViewController") as! SDWTextViewController
 
         self.textViewController.delegate = self
@@ -43,11 +48,61 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource {
 
         
 
-        self.onboardPageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardPageViewController") as! UIPageViewController
+        self.onboardPageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardPageViewController") as! SDWOnboardPageViewController
         self.onboardPageViewController.dataSource = self;
+        self.onboardPageViewController.delegate = self;
+
+        let introOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
+        introOnboard.introTextString = "New Now is a simple tool to remind of one thing that never changes: the life is always happening in the moment of absolute presence – the now. The now is always here, always new and always precious as it is the only point out of time that exists and where we exist"
+        introOnboard.index = 0
+
+        let firstOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
+        firstOnboard.titleString = "Swipe left or right or long press\nto control the speed of text"
+        firstOnboard.mainImageFile = "iphone6"
+        firstOnboard.index = 1
+
+        let secondOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
+        secondOnboard.titleString = "Double tap anywhere to invert the colors"
+        secondOnboard.mainImageFile = "iphone6"
+        secondOnboard.index = 2
+
+        let thirdOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
+        thirdOnboard.titleString = "Pinch zoom to distort the text"
+        thirdOnboard.mainImageFile = "iphone6"
+        thirdOnboard.index = 3
+
+
+        let forthOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
+        forthOnboard.titleString = "Swipe up or down for extras"
+        forthOnboard.mainImageFile = "iphone6"
+        forthOnboard.index = 4
 
 
 
+        onboardingControllers = [introOnboard, firstOnboard,secondOnboard,thirdOnboard,forthOnboard ]
+
+        self.onboardPageViewController.setViewControllers([introOnboard ], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+
+
+
+
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if ((NSUserDefaults.standardUserDefaults().boolForKey("shouldShowOnboarding")) == true || NSUserDefaults.standardUserDefaults().valueForKey("shouldShowOnboarding") == nil) {
+
+            self.openOnboard()
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "shouldShowOnboarding")
+        }
+
+    }
+
+    func openOnboard() {
+
+        self.textViewController.mainTextLabel.alpha = 0.0
+        self.presentViewController(self.onboardPageViewController, animated: true, completion: nil)
     }
 
 
@@ -57,18 +112,22 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource {
 
         var viewControllerAtIndex:UIViewController = UIViewController()
 
+        let pagableViewController = viewController as! SDWPageable
+        var index:NSInteger  = pagableViewController.index
+
+        if index == 0 || index == NSNotFound {
+            return nil
+        }
+
+        index -= 1;
+
         if (pageViewController.isKindOfClass(SDWOnboardPageViewController.classForCoder())) {
+
+            viewControllerAtIndex = self.onboardViewControllerAtIndex(index)!
 
         } else {
 
-            let pagableViewController = viewController as! SDWPageable
-            var index:NSInteger  = pagableViewController.index
 
-            if index == 0 || index == NSNotFound {
-                return nil
-            }
-
-            index -= 1;
 
             viewControllerAtIndex = self.viewControllerAtIndex(index)!
         }
@@ -82,9 +141,27 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource {
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
 
 
+        print(viewController)
+
         var viewControllerAtIndex:UIViewController = UIViewController()
 
         if (pageViewController.isKindOfClass(SDWOnboardPageViewController.classForCoder())) {
+
+            let pagableViewController = viewController as! SDWPageable
+            var index:NSInteger  = pagableViewController.index
+
+            if index == NSNotFound {
+                return nil
+            }
+
+            index += 1;
+
+            if index == 5 {
+
+                return nil
+            }
+
+            viewControllerAtIndex = self.onboardViewControllerAtIndex(index)!
 
         } else {
 
@@ -97,7 +174,7 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource {
 
             index += 1;
 
-            if index == 3 {
+            if index == 2 {
                 return nil
             }
             
@@ -114,16 +191,7 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource {
 
     func onboardViewControllerAtIndex(index:NSInteger) -> UIViewController? {
 
-        if index == 0 {
-            return self.aboutViewController
-
-        } else if index == 1 {
-            return self.textViewController
-        } else if index == 2 {
-            return self.textEditViewController
-        } else {
-            return nil
-        }
+        return onboardingControllers[index]
     }
 
 
@@ -134,8 +202,6 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource {
 
         } else if index == 1 {
             return self.textViewController
-        } else if index == 2 {
-            return self.textEditViewController
         } else {
             return nil
         }
@@ -150,7 +216,7 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource {
 
 
         self.aboutViewController.changeTextColor(color)
-        self.textEditViewController.changeTextColor(color)
+//        self.textEditViewController.changeTextColor(color)
 
 
         if (color == UIColor.blackColor()) {
@@ -166,6 +232,26 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource {
 
 
     }
+
+
+
+
+
+
+
+    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+        pendingIndex = onboardingControllers.indexOf(pendingViewControllers.first!)
+    }
+
+    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if completed {
+            currentIndex = pendingIndex
+            if let index = currentIndex {
+                self.onboardPageViewController.pageControl.currentPage = index
+            }
+        }
+    }
+
 
 }
 

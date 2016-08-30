@@ -7,4 +7,4 @@
 //
 
 #import "PureLayout.h"
-//#import "MarqueeLabel.h"
+#import "TAPageControl.h"

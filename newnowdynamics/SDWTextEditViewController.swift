@@ -11,7 +11,7 @@ import UIKit
 class SDWTextEditViewController: UIViewController, SDWPageable {
 
     let index:NSInteger = 2
-    var currentColor:UIColor = UIColor.whiteColor()
+    var currentTextColor:UIColor = UIColor.whiteColor()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +22,11 @@ class SDWTextEditViewController: UIViewController, SDWPageable {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        if (currentColor == UIColor.blackColor()) {
+        if (currentTextColor == UIColor.blackColor()) {
 
-            self.view.backgroundColor = UIColor.whiteColor()
-        } else {
             self.view.backgroundColor = UIColor.blackColor()
+        } else {
+            self.view.backgroundColor = UIColor.whiteColor()
         }
         
     }
@@ -38,7 +38,7 @@ class SDWTextEditViewController: UIViewController, SDWPageable {
 
     func changeTextColor(color:UIColor) -> Void {
 
-        currentColor = color
+        currentTextColor = color
     }
     
 

@@ -10,13 +10,24 @@ import UIKit
 
 class SDWAboutViewController: UIViewController, SDWPageable {
 
-    @IBOutlet var rightTextThree: UILabel!
-    @IBOutlet var rightTextTwo: UILabel!
-    @IBOutlet var rightTextOne: UILabel!
+    var delegate:SDWMainController?
+
+    @IBOutlet var openOnboardButton: UIButton!
+    @IBOutlet var shareUnderlineView: UIView!
+    @IBOutlet var openOnboardUnderlineView: UIView!
+    @IBOutlet var kraftUnderlineView: UIView!
+    @IBOutlet var letcusUnderlineView: UIView!
+    @IBOutlet var alxUnderlineView: UIView!
+    @IBOutlet var shareButton: UIButton!
+    @IBOutlet var codedLabel: UILabel!
+    @IBOutlet var designedLabel: UILabel!
+    @IBOutlet var alxButton: UIButton!
+    @IBOutlet var letcusButton: UIButton!
+    @IBOutlet var kraftButton: UIButton!
     @IBOutlet var leftText: UITextView!
     let index:NSInteger = 0
-
-    var currentColor:UIColor = UIColor.whiteColor()
+    let leftTextString = "New Now is a simple tool to remind of one thing that never changes: the life is always happening in the moment of absolute presence – the now. The now is always here, always new and always precious as it is the only point out of time that exists and where we exist"
+    var currentTextColor:UIColor = UIColor.whiteColor()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,17 +38,93 @@ class SDWAboutViewController: UIViewController, SDWPageable {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.rightTextOne.textColor = currentColor
-        self.rightTextTwo.textColor = currentColor
-        self.rightTextThree.textColor = currentColor
-        self.leftText.textColor = currentColor
 
-        if (currentColor == UIColor.blackColor()) {
+
+        if (currentTextColor == UIColor.blackColor()) {
+
+            alxButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            letcusButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            kraftButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            shareButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            openOnboardButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+
+            codedLabel.textColor = UIColor.whiteColor()
+            designedLabel.textColor = UIColor.whiteColor()
+
+            self.leftText.textColor = UIColor.whiteColor()
+
+            kraftUnderlineView.backgroundColor = UIColor.whiteColor()
+            letcusUnderlineView.backgroundColor = UIColor.whiteColor()
+            alxUnderlineView.backgroundColor = UIColor.whiteColor()
+
+            shareUnderlineView.backgroundColor = UIColor.whiteColor()
+            openOnboardUnderlineView.backgroundColor =  UIColor.whiteColor()
+
+
+            self.view.backgroundColor = UIColor.blackColor()
+
+
+        } else {
+
+            alxButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            letcusButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            kraftButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            openOnboardButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+
+
+            kraftUnderlineView.backgroundColor = UIColor.blackColor()
+            letcusUnderlineView.backgroundColor = UIColor.blackColor()
+            alxUnderlineView.backgroundColor = UIColor.blackColor()
+            shareUnderlineView.backgroundColor = UIColor.blackColor()
+            openOnboardUnderlineView.backgroundColor =  UIColor.blackColor()
+
+
+            shareButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+
+            codedLabel.textColor = UIColor.blackColor()
+            designedLabel.textColor = UIColor.blackColor()
+
+
+            self.leftText.textColor = UIColor.blackColor()
 
             self.view.backgroundColor = UIColor.whiteColor()
-        } else {
-            self.view.backgroundColor = UIColor.blackColor()
+
         }
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 8
+        paragraphStyle.alignment = NSTextAlignment.Justified
+
+
+
+
+        let mutableAttributedString = NSMutableAttributedString(string: leftTextString,
+                                                                attributes: [
+                                                                    NSParagraphStyleAttributeName: paragraphStyle,
+                                                                    NSBaselineOffsetAttributeName: NSNumber(float: 0)
+            ])
+
+
+        if (currentTextColor == UIColor.blackColor()) {
+                    mutableAttributedString.addAttribute(NSForegroundColorAttributeName, value:  UIColor.whiteColor(),range: NSMakeRange(0, mutableAttributedString.length))
+        } else {
+                    mutableAttributedString.addAttribute(NSForegroundColorAttributeName, value:  UIColor.blackColor(),range: NSMakeRange(0, mutableAttributedString.length))
+        }
+
+
+        mutableAttributedString.addAttribute(NSFontAttributeName,
+                                             value: UIFont(
+                                                name: "Relative-Book",
+                                                size: 16.0)!,
+                                             range: NSMakeRange(0, mutableAttributedString.length))
+
+
+        mutableAttributedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, mutableAttributedString.length))
+
+        leftText.attributedText = mutableAttributedString
+
+
+
 
     }
 
@@ -48,7 +135,7 @@ class SDWAboutViewController: UIViewController, SDWPageable {
 
     func changeTextColor(color:UIColor) -> Void {
 
-        currentColor = color
+        currentTextColor = color
 
     }
 
@@ -65,6 +152,10 @@ class SDWAboutViewController: UIViewController, SDWPageable {
         }
     }
 
+    @IBAction func openOnboardDidTap(sender: AnyObject) {
+//
+      self.delegate?.openOnboard()
+    }
     /*
     // MARK: - Navigation
 

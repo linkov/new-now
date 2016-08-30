@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB0AAD1D03CA27DEA1637917 /* libPods-newnowdynamics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F473951FB969623FDF10EEE /* libPods-newnowdynamics.a */; };
 		F131A7731CAAE2040020DB1D /* SDWScrollTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F131A7721CAAE2040020DB1D /* SDWScrollTextView.swift */; };
 		F1364FD01CA9700600971D2C /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F1364FCF1CA9700500971D2C /* MarqueeLabel.m */; };
 		F1364FD31CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1364FD21CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf */; };
@@ -14,21 +15,22 @@
 		F13662E31CA7195D005785A2 /* SDWAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13662E21CA7195D005785A2 /* SDWAboutViewController.swift */; };
 		F13662E51CA71A5E005785A2 /* SDWTextEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13662E41CA71A5E005785A2 /* SDWTextEditViewController.swift */; };
 		F13662E71CA727F5005785A2 /* SDWPagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13662E61CA727F5005785A2 /* SDWPagable.swift */; };
+		F1BF1D911D76402600C9A3BB /* RelativeBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1BF1D8F1D76400900C9A3BB /* RelativeBold.ttf */; };
 		F1D5A0E71D6CFC5000D1F155 /* SDWOnboardPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5A0E61D6CFC5000D1F155 /* SDWOnboardPageViewController.swift */; };
 		F1D5A0E91D6CFCEC00D1F155 /* SDWOnboardContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D5A0E81D6CFCEC00D1F155 /* SDWOnboardContentViewController.swift */; };
+		F1D5A0EA1D71DC1B00D1F155 /* RelativeBook.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1D5A0E51D6CE97F00D1F155 /* RelativeBook.ttf */; };
 		F1F13FFE1D3C47C900397350 /* MarqueeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F13FFD1D3C47C900397350 /* MarqueeLabel.swift */; };
 		F1F508241CA4A8BE00F1189B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F508231CA4A8BE00F1189B /* AppDelegate.swift */; };
 		F1F508261CA4A8BE00F1189B /* SDWMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F508251CA4A8BE00F1189B /* SDWMainController.swift */; };
 		F1F508291CA4A8BE00F1189B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1F508271CA4A8BE00F1189B /* Main.storyboard */; };
 		F1F5082B1CA4A8BE00F1189B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1F5082A1CA4A8BE00F1189B /* Assets.xcassets */; };
 		F1F5082E1CA4A8BE00F1189B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1F5082C1CA4A8BE00F1189B /* LaunchScreen.storyboard */; };
-		F53FD1CE133FF41940CD01D8 /* libPods-newnowdynamics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C96A0DF623E2B565E8A015 /* libPods-newnowdynamics.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		65C96A0DF623E2B565E8A015 /* libPods-newnowdynamics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-newnowdynamics.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B3D2EC818FFDC985A0AC664 /* Pods-newnowdynamics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newnowdynamics.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newnowdynamics/Pods-newnowdynamics.debug.xcconfig"; sourceTree = "<group>"; };
-		F0967AA0702C9D45C3FCB888 /* Pods-newnowdynamics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newnowdynamics.release.xcconfig"; path = "Pods/Target Support Files/Pods-newnowdynamics/Pods-newnowdynamics.release.xcconfig"; sourceTree = "<group>"; };
+		1F473951FB969623FDF10EEE /* libPods-newnowdynamics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-newnowdynamics.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DA7186139BE8FB25A3520E7 /* Pods-newnowdynamics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newnowdynamics.release.xcconfig"; path = "Pods/Target Support Files/Pods-newnowdynamics/Pods-newnowdynamics.release.xcconfig"; sourceTree = "<group>"; };
+		8410D50EAC43FD5F9115E8E1 /* Pods-newnowdynamics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newnowdynamics.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newnowdynamics/Pods-newnowdynamics.debug.xcconfig"; sourceTree = "<group>"; };
 		F131A7721CAAE2040020DB1D /* SDWScrollTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWScrollTextView.swift; sourceTree = "<group>"; };
 		F1364FCB1CA87C6700971D2C /* newnowdynamics-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "newnowdynamics-Bridging-Header.h"; sourceTree = "<group>"; };
 		F1364FCE1CA9700500971D2C /* MarqueeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeLabel.h; sourceTree = "<group>"; };
@@ -38,6 +40,7 @@
 		F13662E21CA7195D005785A2 /* SDWAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWAboutViewController.swift; sourceTree = "<group>"; };
 		F13662E41CA71A5E005785A2 /* SDWTextEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWTextEditViewController.swift; sourceTree = "<group>"; };
 		F13662E61CA727F5005785A2 /* SDWPagable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWPagable.swift; sourceTree = "<group>"; };
+		F1BF1D8F1D76400900C9A3BB /* RelativeBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RelativeBold.ttf; sourceTree = "<group>"; };
 		F1D5A0E51D6CE97F00D1F155 /* RelativeBook.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RelativeBook.ttf; sourceTree = "<group>"; };
 		F1D5A0E61D6CFC5000D1F155 /* SDWOnboardPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWOnboardPageViewController.swift; sourceTree = "<group>"; };
 		F1D5A0E81D6CFCEC00D1F155 /* SDWOnboardContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDWOnboardContentViewController.swift; sourceTree = "<group>"; };
@@ -56,26 +59,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F53FD1CE133FF41940CD01D8 /* libPods-newnowdynamics.a in Frameworks */,
+				BB0AAD1D03CA27DEA1637917 /* libPods-newnowdynamics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5B31356C18DA0CD2D6A1A01D /* Frameworks */ = {
+		15CAFD31BFBC44A8F621C429 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				65C96A0DF623E2B565E8A015 /* libPods-newnowdynamics.a */,
+				1F473951FB969623FDF10EEE /* libPods-newnowdynamics.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		689CE6B56EB4484D932FFEF0 /* Pods */ = {
+		49470E17FFAF9FCFE671345B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8B3D2EC818FFDC985A0AC664 /* Pods-newnowdynamics.debug.xcconfig */,
-				F0967AA0702C9D45C3FCB888 /* Pods-newnowdynamics.release.xcconfig */,
+				8410D50EAC43FD5F9115E8E1 /* Pods-newnowdynamics.debug.xcconfig */,
+				4DA7186139BE8FB25A3520E7 /* Pods-newnowdynamics.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -102,6 +105,7 @@
 		F1364FD11CA9788A00971D2C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				F1BF1D8F1D76400900C9A3BB /* RelativeBold.ttf */,
 				F1364FD21CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf */,
 				F1D5A0E51D6CE97F00D1F155 /* RelativeBook.ttf */,
 			);
@@ -124,8 +128,8 @@
 				F1364FCC1CA9700500971D2C /* Vendor */,
 				F1F508221CA4A8BE00F1189B /* newnowdynamics */,
 				F1F508211CA4A8BE00F1189B /* Products */,
-				689CE6B56EB4484D932FFEF0 /* Pods */,
-				5B31356C18DA0CD2D6A1A01D /* Frameworks */,
+				49470E17FFAF9FCFE671345B /* Pods */,
+				15CAFD31BFBC44A8F621C429 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,13 +168,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1F508321CA4A8BE00F1189B /* Build configuration list for PBXNativeTarget "newnowdynamics" */;
 			buildPhases = (
-				D64D0CD4DD1184412F1A7BAE /* Check Pods Manifest.lock */,
+				8D4EB5B9B6F2F86AB1390EEB /* [CP] Check Pods Manifest.lock */,
 				F1F5081C1CA4A8BE00F1189B /* Sources */,
 				F1F5081D1CA4A8BE00F1189B /* Frameworks */,
 				F1F5081E1CA4A8BE00F1189B /* Resources */,
-				3BE0C6DE1E24AB90F0A93260 /* Embed Pods Frameworks */,
-				E65EE2541B0A948DEC60A2BE /* Copy Pods Resources */,
 				F1364FD91CAA7CF000971D2C /* ShellScript */,
+				CC8BA6BEEB412FD769FA9A20 /* [CP] Embed Pods Frameworks */,
+				4B73F2E10F429501364DF81F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -223,6 +227,8 @@
 				F1F5082E1CA4A8BE00F1189B /* LaunchScreen.storyboard in Resources */,
 				F1F5082B1CA4A8BE00F1189B /* Assets.xcassets in Resources */,
 				F1364FD31CA9788A00971D2C /* ProximaNovaCondensedSemibold.otf in Resources */,
+				F1D5A0EA1D71DC1B00D1F155 /* RelativeBook.ttf in Resources */,
+				F1BF1D911D76402600C9A3BB /* RelativeBold.ttf in Resources */,
 				F1F508291CA4A8BE00F1189B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,29 +236,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3BE0C6DE1E24AB90F0A93260 /* Embed Pods Frameworks */ = {
+		4B73F2E10F429501364DF81F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-newnowdynamics/Pods-newnowdynamics-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-newnowdynamics/Pods-newnowdynamics-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D64D0CD4DD1184412F1A7BAE /* Check Pods Manifest.lock */ = {
+		8D4EB5B9B6F2F86AB1390EEB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,19 +266,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E65EE2541B0A948DEC60A2BE /* Copy Pods Resources */ = {
+		CC8BA6BEEB412FD769FA9A20 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-newnowdynamics/Pods-newnowdynamics-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-newnowdynamics/Pods-newnowdynamics-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F1364FD91CAA7CF000971D2C /* ShellScript */ = {
@@ -414,7 +420,7 @@
 		};
 		F1F508331CA4A8BE00F1189B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B3D2EC818FFDC985A0AC664 /* Pods-newnowdynamics.debug.xcconfig */;
+			baseConfigurationReference = 8410D50EAC43FD5F9115E8E1 /* Pods-newnowdynamics.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Black";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Alexey Linkov (43R88X5B35)";
@@ -431,7 +437,7 @@
 		};
 		F1F508341CA4A8BE00F1189B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0967AA0702C9D45C3FCB888 /* Pods-newnowdynamics.release.xcconfig */;
+			baseConfigurationReference = 4DA7186139BE8FB25A3520E7 /* Pods-newnowdynamics.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Black";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Alexey Linkov (43R88X5B35)";

@@ -13,6 +13,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
 
 
+    var slowdownTimer:NSTimer?
     var lastTimeOffset: CFTimeInterval = 0
     var delegate:SDWMainController?
 
@@ -45,7 +46,12 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
             self.mainTextLabel.type = .Continuous
         }
 
-        
+
+        UIView.animateWithDuration(0.5, animations: { 
+            self.mainTextLabel.alpha = 1.0
+        })
+
+
 
 
 
@@ -56,6 +62,23 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
 
         self.mainTextLabel.text = self.baseText
+
+//        let mutableAttributedString = NSMutableAttributedString(string: self.baseText,
+//                                                                attributes: [
+//                                                                    NSBaselineOffsetAttributeName: NSNumber(float: 0)
+//            ])
+//
+//        mutableAttributedString.addAttribute(NSFontAttributeName,
+//                                             value: UIFont(
+//                                                name: "ProximaNovaCond-Semibold",
+//                                                size: 300.0)!,
+//                                             range: NSMakeRange(0, mutableAttributedString.length))
+//
+//        mutableAttributedString.addAttribute(NSKernAttributeName, value: 1.0, range: NSMakeRange(0, mutableAttributedString.length))
+
+  //      self.mainTextLabel.attributedText = mutableAttributedString
+
+
         self.mainTextLabel.type = .Continuous
 
         self.mainTextLabel.font = UIFont(name: self.mainTextLabel.font.fontName, size: 300)
@@ -72,11 +95,44 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
     }
 
+    func startSlowdown() {
+
+        if (self.mainTextLabel.sublabel.layer.speed != 0) {
+
+            var velocitySpeed:Float = self.mainTextLabel.sublabel.layer.speed
+            velocitySpeed -= 1
+            self.updateToSpeed(velocitySpeed,shouldRestart:  true)
+        }
+
+
+    }
+
 
     @IBAction func didLongPress(sender: UILongPressGestureRecognizer) {
 
-        let velocitySpeed:Float = self.mainTextLabel.sublabel.layer.speed/2
-        self.updateToSpeed(velocitySpeed,shouldRestart:  true)
+        if sender.state == UIGestureRecognizerState.Began {
+
+
+            slowdownTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: #selector(SDWTextViewController.startSlowdown), userInfo: nil, repeats: true)
+
+        }
+        else if sender.state == UIGestureRecognizerState.Changed {
+
+
+
+
+        } else if (sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Failed) {
+
+            slowdownTimer?.invalidate()
+            slowdownTimer = nil
+
+
+
+        }
+
+
+
+
 
     }
 
