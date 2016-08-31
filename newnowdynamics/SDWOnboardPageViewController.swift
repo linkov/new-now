@@ -10,8 +10,9 @@ import UIKit
 
 class SDWOnboardPageViewController: UIPageViewController {
 
-   var pageControl:TAPageControl!
-   let closeButton:UIButton = UIButton.init()
+    var pageControl:TAPageControl!
+    let closeButton:UIButton = UIButton.init()
+    var parentDelegate:SDWMainController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +71,10 @@ class SDWOnboardPageViewController: UIPageViewController {
 
 
     func closeOnboard(gestureRecognizer: UIGestureRecognizer) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: {
+
+            self.parentDelegate?.didCloseOnboard()
+        })
     }
     
 

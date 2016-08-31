@@ -51,6 +51,7 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource, UIPag
         self.onboardPageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardPageViewController") as! SDWOnboardPageViewController
         self.onboardPageViewController.dataSource = self;
         self.onboardPageViewController.delegate = self;
+        self.onboardPageViewController.parentDelegate = self
 
         let introOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
         introOnboard.introTextString = "New Now is a simple tool to remind of one thing that never changes: the life is always happening in the moment of absolute presence – the now. The now is always here, always new and always precious as it is the only point out of time that exists and where we exist"
@@ -103,6 +104,15 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource, UIPag
 
         self.textViewController.mainTextLabel.alpha = 0.0
         self.presentViewController(self.onboardPageViewController, animated: true, completion: nil)
+    }
+
+    func didCloseOnboard() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.textViewController.mainTextLabel.alpha = 1.0
+        })
+
+
+
     }
 
 

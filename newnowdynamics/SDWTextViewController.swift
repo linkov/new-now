@@ -8,6 +8,21 @@
 
 import UIKit
 
+struct ScreenSize
+{
+    static let SCREEN_WIDTH = UIScreen.mainScreen().bounds.size.width
+    static let SCREEN_HEIGHT = UIScreen.mainScreen().bounds.size.height
+    static let SCREEN_MAX_LENGTH = max(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
+    static let SCREEN_MIN_LENGTH = min(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
+}
+
+struct DeviceType
+{
+    static let IS_IPHONE_4_OR_LESS =  UIDevice.currentDevice().userInterfaceIdiom == .Phone && ScreenSize.SCREEN_MAX_LENGTH < 568.0
+    static let IS_IPHONE_5 = UIDevice.currentDevice().userInterfaceIdiom == .Phone && ScreenSize.SCREEN_MAX_LENGTH == 568.0
+    static let IS_IPHONE_6 = UIDevice.currentDevice().userInterfaceIdiom == .Phone && ScreenSize.SCREEN_MAX_LENGTH == 667.0
+    static let IS_IPHONE_6P = UIDevice.currentDevice().userInterfaceIdiom == .Phone && ScreenSize.SCREEN_MAX_LENGTH == 736.0
+}
 
 class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate {
 
@@ -47,11 +62,6 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
         }
 
 
-        UIView.animateWithDuration(0.5, animations: { 
-            self.mainTextLabel.alpha = 1.0
-        })
-
-
 
 
 
@@ -81,7 +91,14 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
         self.mainTextLabel.type = .Continuous
 
-        self.mainTextLabel.font = UIFont(name: self.mainTextLabel.font.fontName, size: 300)
+
+        if (DeviceType.IS_IPHONE_6P) {
+            self.mainTextLabel.font = UIFont(name: self.mainTextLabel.font.fontName, size: 200)
+
+        } else {
+            self.mainTextLabel.font = UIFont(name: self.mainTextLabel.font.fontName, size: 300)
+
+        }
         self.mainTextLabel.animationDelay = 0.0
         self.mainTextLabel.speed = .Rate(10.0)
         self.mainTextLabel.triggerScrollStart()
@@ -126,13 +143,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
             slowdownTimer?.invalidate()
             slowdownTimer = nil
 
-
-
         }
-
-
-
-
 
     }
 
