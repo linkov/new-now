@@ -17,6 +17,17 @@ class SDWOnboardPageViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        for gr:UIGestureRecognizer in self.gestureRecognizers {
+//
+//            gr.delegate = self;
+//        }
+
+//        self.gestureRecognizers
+
+//        for ( gR:UIGestureRecognizer,, in self.view.gestureRecognizers) {
+//            gR.delegate = self;
+//        }
+
         let dotView:UIView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: 6))
         dotView.layer.cornerRadius = 3
         dotView.layer.masksToBounds = true
@@ -78,15 +89,10 @@ class SDWOnboardPageViewController: UIPageViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+//    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+//        return true
+//    }
 
 
 

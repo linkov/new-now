@@ -39,14 +39,14 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
     var panGestureBeganTime:NSTimeInterval = 0
     var previousScrollSpeed:CGFloat = 0
     let index:NSInteger = 1
-    let baseText:String = " THIS VERY MOMENT HAS ALREADY BECOME THE PAST – "
+    let baseText:String = " THIS NEW MOMENT HAS ALREADY BECOME THE PAST – "
     @IBOutlet var mainTextLabel: MarqueeLabel!
 
 
 
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        self.updateToSpeed(0.0, shouldRestart: false)
+//        self.updateToSpeed(0.0, shouldRestart: false)
 //        self.mainTextLabel.pauseLabel()
     }
 
@@ -71,22 +71,22 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
         super.viewDidLoad()
 
 
-        self.mainTextLabel.text = self.baseText
+//        self.mainTextLabel.text = self.baseText
 
-//        let mutableAttributedString = NSMutableAttributedString(string: self.baseText,
-//                                                                attributes: [
-//                                                                    NSBaselineOffsetAttributeName: NSNumber(float: 0)
-//            ])
-//
-//        mutableAttributedString.addAttribute(NSFontAttributeName,
-//                                             value: UIFont(
-//                                                name: "ProximaNovaCond-Semibold",
-//                                                size: 300.0)!,
-//                                             range: NSMakeRange(0, mutableAttributedString.length))
-//
-//        mutableAttributedString.addAttribute(NSKernAttributeName, value: 1.0, range: NSMakeRange(0, mutableAttributedString.length))
+        let mutableAttributedString = NSMutableAttributedString(string: self.baseText,
+                                                                attributes: [
+                                                                    NSBaselineOffsetAttributeName: NSNumber(float: 0)
+            ])
 
-  //      self.mainTextLabel.attributedText = mutableAttributedString
+        mutableAttributedString.addAttribute(NSFontAttributeName,
+                                             value: UIFont(
+                                                name: "ProximaNovaCond-Semibold",
+                                                size: 300.0)!,
+                                             range: NSMakeRange(0, mutableAttributedString.length))
+
+        mutableAttributedString.addAttribute(NSKernAttributeName, value: 10.0, range: NSMakeRange(0, mutableAttributedString.length))
+
+        self.mainTextLabel.attributedText = mutableAttributedString
 
 
         self.mainTextLabel.type = .Continuous
@@ -114,10 +114,23 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
     func startSlowdown() {
 
-        if (self.mainTextLabel.sublabel.layer.speed != 0) {
+
+        if (self.mainTextLabel.sublabel.layer.speed > 1) {
+
+//            print(self.mainTextLabel.sublabel.layer.speed)
 
             var velocitySpeed:Float = self.mainTextLabel.sublabel.layer.speed
-            velocitySpeed -= 1
+            if (velocitySpeed > 150) {
+
+                velocitySpeed -= 100
+                
+            } else if (velocitySpeed > 10) {
+            velocitySpeed -= 10
+            } else {
+
+                velocitySpeed -= 1
+            }
+
             self.updateToSpeed(velocitySpeed,shouldRestart:  true)
         }
 
@@ -172,12 +185,6 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
         }
         else if sender.state == UIGestureRecognizerState.Changed {
 
-//            var pointSize:CGFloat  = (sender.velocity > 0.0 ? 10.0 : -10.0) + self.mainTextLabel.font.pointSize;
-//            pointSize = max(min(pointSize, 200), 60);
-//            //print(pointSize)
-//            self.mainTextLabel.font = UIFont(name: (self.mainTextLabel.font?.fontName)!, size: pointSize)
-
-
             var scale:CGFloat = self.mainTextLabel.superview!.transform.a
 
             if (sender.velocity > 0.0) {
@@ -188,19 +195,12 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
                 scale -= 0.02
             }
 
-           scale =  max(min(scale, 3), 1.0);
-
-
-//            let newTransform:CGAffineTransform = CGAffineTransformMake(1.0, 0.0, scale, 1.0, 0.0, 0.0);
-
-//           self.mainTextLabel.superview!.transform = CGAffineTransformScale(newTransform, scale, 1)
-               self.mainTextLabel.superview!.transform = CGAffineTransformMakeScale(scale, 1)
-
+        scale =  max(min(scale, 3), 1.0);
+        self.mainTextLabel.superview!.transform = CGAffineTransformMakeScale(scale, 1)
 
 
         } else if (sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Failed) {
 
-            //MarqueeLabel.controllerLabelsAnimate(self)
             self.updateToSpeed(self.pinchFontBeginSpeed,shouldRestart:  true)
 
         }
@@ -226,6 +226,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
             let velocitySpeed:Float = Float(fabs(velocityX/10))
 
             lastSpeedBeforeDirectionChange = velocitySpeed
+
 
 
             if velocityX > 0 {

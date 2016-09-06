@@ -59,6 +59,8 @@ public class MarqueeLabel: UILabel {
             if ((sublabel.layer.presentationLayer()?.frame) != nil) {
                 lastXoffset = (sublabel.layer.presentationLayer()?.frame.origin.x)!
 
+//                print("Offset before switch")
+//                print(lastXoffset)
             }
 
 
@@ -600,40 +602,36 @@ public class MarqueeLabel: UILabel {
             if (type == .Continuous) {
                 homeLabelFrame = CGRectIntegral(CGRectMake(leadingBuffer, 0.0, expectedLabelSize.width, bounds.size.height))
 
-                print("call Continuous")
-                print("homeLabelFrame")
-                print(homeLabelFrame)
-                print("lastXoffset")
-                print(lastXoffset)
+
+
+                var lastOffsetFinal:CGFloat = 0.0
+
+                if (lastXoffset > 0) {
+
+                    let totalWidth =  (bounds.size.width - (expectedLabelSize.width + leadingBuffer))
+                    lastOffsetFinal = -( abs(totalWidth) - abs(lastXoffset) + bounds.size.width )
+
+                } else {
+
+                    lastOffsetFinal = -abs(lastXoffset)
+                }
+
+
+
+
+//                print("call Continuous / Swipe to left")
+//                print(lastOffsetFinal)
                 awayOffset = -(homeLabelFrame.size.width + minTrailing)
 
 
-
-
-//                if (lastXoffset > 0) {
-//
-//
-//
-//                    calculatedDevider = ( abs(lastXoffset) / (bounds.size.width - (expectedLabelSize.width + leadingBuffer)) )
-//
-//
-//                    var realOffset:CGFloat = 0
-//                    realOffset = ( 0.0 + ( abs(lastXoffset) /  abs(calculatedDevider) ) )
-//                    calculatedRect = CGRectMake( realOffset  , 0.0, expectedLabelSize.width, bounds.size.height)
-//                    homeLabelFrame = CGRectIntegral(calculatedRect)
-//
-//
-//                } else {
-//                            homeLabelFrame = CGRectOffset(homeLabelFrame, -abs(lastXoffset), 0)
-//                }
-
-                 homeLabelFrame = CGRectOffset(homeLabelFrame, -abs(lastXoffset), 0)
+                 homeLabelFrame = CGRectOffset(homeLabelFrame, lastOffsetFinal, 0)
 
 
 
             } else { // .ContinuousReverse
 
-                print("call ContinuousReverse")
+//                print("call ContinuousReverse / Swipe to right")
+//                print(lastXoffset)
 
                 homeLabelFrame = CGRectIntegral(CGRectMake(bounds.size.width - (expectedLabelSize.width + leadingBuffer), 0.0, expectedLabelSize.width, bounds.size.height))
                 awayOffset = (homeLabelFrame.size.width + minTrailing)
@@ -663,9 +661,16 @@ public class MarqueeLabel: UILabel {
                     realOffset = ( (bounds.size.width - (expectedLabelSize.width + leadingBuffer)) + ( abs(lastXoffset) /  abs(calculatedDevider) ) )
                 }
 
+//                print("calculatedDevider")
+//                print(calculatedDevider)
+//
+//                print("realOffset")
+//                print(realOffset)
+
                 calculatedRect = CGRectMake( realOffset  , 0.0, expectedLabelSize.width, bounds.size.height)
 //                print("calculatedRect")
 //                print(calculatedRect)
+
 //                 calculatedRect = CGRectMake( -abs(lastXoffset), 0.0, expectedLabelSize.width, bounds.size.height)
                 homeLabelFrame = CGRectIntegral(calculatedRect)
 
@@ -673,7 +678,7 @@ public class MarqueeLabel: UILabel {
             }
 
 
-            print(lastXoffset)
+
             
             // Set frame and text
             sublabel.frame = homeLabelFrame

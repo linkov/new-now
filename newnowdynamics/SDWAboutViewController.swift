@@ -128,22 +128,38 @@ class SDWAboutViewController: UIViewController, SDWPageable {
 
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     func changeTextColor(color:UIColor) -> Void {
-
         currentTextColor = color
+    }
 
+
+    @IBAction func alxDidTap(sender: AnyObject) {
+
+        let requestUrl = NSURL(string: "http://werk.studio")
+        UIApplication.sharedApplication().openURL(requestUrl!)
+
+    }
+
+
+    @IBAction func letcusDidTap(sender: AnyObject) {
+
+        let requestUrl = NSURL(string: "https://vimeo.com/letcius")
+        UIApplication.sharedApplication().openURL(requestUrl!)
+
+    }
+
+    @IBAction func kraftDidTap(sender: AnyObject) {
+
+        let requestUrl = NSURL(string: "http://egorkraft.co.uk/")
+        UIApplication.sharedApplication().openURL(requestUrl!)
     }
 
     @IBAction func ShareDidTap(sender: AnyObject) {
 
-        let textToShare = "New Now is Now"
+        let textToShare = "App for the moment of absolute presence"
 
-        if let myWebsite = NSURL(string: "http://www.google.com/") {
+        if let myWebsite = NSURL(string: "https://itunes.apple.com/us/app/apple-store/id1150307790?mt=8") {
             let objectsToShare = [textToShare, myWebsite]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
 
