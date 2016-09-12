@@ -27,6 +27,7 @@ struct DeviceType
 class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate {
 
 
+    @IBOutlet var introImageView: UIImageView!
 
     var slowdownTimer:NSTimer?
     var lastTimeOffset: CFTimeInterval = 0
@@ -67,8 +68,19 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        UIView.animateWithDuration(0.6) { 
+
+            self.introImageView.alpha = 0.0
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.introImageView.alpha = 1.0
 
 
 //        self.mainTextLabel.text = self.baseText

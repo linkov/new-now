@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -70,13 +70,20 @@
                                     <outletCollection property="gestureRecognizers" destination="cBc-gH-oXd" appends="YES" id="u8o-H4-VQK"/>
                                 </connections>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Initial" translatesAutoresizingMaskIntoConstraints="NO" id="r77-Qt-5yd">
+                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Sfq-GY-frb" firstAttribute="top" secondItem="dVd-Fg-nyc" secondAttribute="bottom" constant="50" id="3JW-w6-dAK"/>
+                            <constraint firstAttribute="trailing" secondItem="r77-Qt-5yd" secondAttribute="trailing" id="5lP-Ds-1bJ"/>
                             <constraint firstItem="Sfq-GY-frb" firstAttribute="leading" secondItem="toI-7G-uIG" secondAttribute="leading" id="NNr-WH-kFn"/>
+                            <constraint firstItem="r77-Qt-5yd" firstAttribute="top" secondItem="dVd-Fg-nyc" secondAttribute="bottom" id="OI9-qA-aYS"/>
+                            <constraint firstItem="d6T-rS-Et5" firstAttribute="top" secondItem="r77-Qt-5yd" secondAttribute="bottom" id="fHX-9u-8EM"/>
                             <constraint firstAttribute="trailing" secondItem="Sfq-GY-frb" secondAttribute="trailing" id="ogW-4m-n6e"/>
                             <constraint firstItem="d6T-rS-Et5" firstAttribute="top" secondItem="Sfq-GY-frb" secondAttribute="bottom" constant="20" id="rYN-K6-Ghz"/>
+                            <constraint firstItem="r77-Qt-5yd" firstAttribute="leading" secondItem="toI-7G-uIG" secondAttribute="leading" id="wYg-gV-pTm"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="B8J-he-5Fz" appends="YES" id="WBD-05-ikD"/>
@@ -86,6 +93,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="introImageView" destination="r77-Qt-5yd" id="8LW-Zi-g45"/>
                         <outlet property="mainTextLabel" destination="dV6-SV-wsQ" id="Unv-zO-0NI"/>
                     </connections>
                 </viewController>
@@ -472,4 +480,7 @@
             <point key="canvasLocation" x="181" y="357"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Initial" width="1920" height="1080"/>
+    </resources>
 </document>
