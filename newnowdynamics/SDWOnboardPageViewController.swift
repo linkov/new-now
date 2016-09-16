@@ -58,7 +58,7 @@ class SDWOnboardPageViewController: UIPageViewController {
 
         pageControl = TAPageControl.newAutoLayoutView()
         self.view.addSubview(pageControl)
-        pageControl.autoSetDimensionsToSize(CGSize.init(width: 100, height: 20))
+        pageControl.autoSetDimensionsToSize(CGSize.init(width: 0, height: 20))
         pageControl.autoPinToBottomLayoutGuideOfViewController(self, withInset: 50)
         pageControl.autoAlignAxisToSuperviewAxis(ALAxis.Vertical)
         pageControl.numberOfPages = 5
