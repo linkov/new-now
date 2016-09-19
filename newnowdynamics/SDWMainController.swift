@@ -53,36 +53,6 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource, UIPag
         self.onboardPageViewController.delegate = self;
         self.onboardPageViewController.parentDelegate = self
 
-        let introOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
-        introOnboard.introTextString = "New Now is a simple tool to remind of one thing that never changes: the life is always happening in the moment of absolute presence – the now. The now is always here, always new and always precious as it is the only point out of time that exists and where we exist"
-        introOnboard.index = 0
-
-        let firstOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
-        firstOnboard.titleString = "Swipe left or right or long press\nto control the speed of text"
-        firstOnboard.mainImageFile = "iphone6"
-        firstOnboard.index = 1
-
-        let secondOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
-        secondOnboard.titleString = "Double tap anywhere to invert the colors"
-        secondOnboard.mainImageFile = "iphone6"
-        secondOnboard.index = 2
-
-        let thirdOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
-        thirdOnboard.titleString = "Pinch zoom to distort the text"
-        thirdOnboard.mainImageFile = "iphone6"
-        thirdOnboard.index = 3
-
-
-        let forthOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
-        forthOnboard.titleString = "Swipe up or down for extras"
-        forthOnboard.mainImageFile = "iphone6"
-        forthOnboard.index = 4
-
-
-
-        onboardingControllers = [introOnboard, firstOnboard,secondOnboard,thirdOnboard,forthOnboard ]
-
-        self.onboardPageViewController.setViewControllers([introOnboard ], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
 
 
 
@@ -102,7 +72,81 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource, UIPag
 
     func openOnboard() {
 
-        self.textViewController.mainTextLabel.alpha = 0.0
+        let introOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
+        introOnboard.introTextString = "New Now is a simple tool to remind of one thing that never changes: the life is always happening in the moment of absolute presence – the now. The now is always here, always new and always precious as it is the only point out of time that exists and where we exist"
+        introOnboard.index = 0
+        introOnboard.typeIndex = 0
+
+        let firstOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
+        firstOnboard.titleString = "Swipe left or right or long press\nto control the speed of text"
+        firstOnboard.mainImageFile = "iphone6"
+        firstOnboard.index = 1
+        firstOnboard.typeIndex = 1
+
+        let secondOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
+        secondOnboard.titleString = "Double tap anywhere to invert the colors"
+        secondOnboard.mainImageFile = "iphone6"
+        secondOnboard.index = 2
+        secondOnboard.typeIndex = 2
+
+        let thirdOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
+        thirdOnboard.titleString = "Pinch zoom to distort the text"
+        thirdOnboard.mainImageFile = "iphone6"
+        thirdOnboard.index = 3
+        thirdOnboard.typeIndex = 3
+
+
+        let forthOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
+        forthOnboard.titleString = "Swipe up or down for extras"
+        forthOnboard.mainImageFile = "iphone6"
+        forthOnboard.index = 4
+        forthOnboard.typeIndex = 4
+
+
+
+        onboardingControllers = [introOnboard, firstOnboard,secondOnboard,thirdOnboard,forthOnboard ]
+
+        self.onboardPageViewController.setViewControllers([onboardingControllers[0] ], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+
+        self.onboardPageViewController.isIntroMode = true
+        self.presentViewController(self.onboardPageViewController, animated: false, completion: nil)
+    }
+
+    func openInstuctions() {
+
+        let firstOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
+        firstOnboard.titleString = "Swipe left or right or long press\nto control the speed of text"
+        firstOnboard.mainImageFile = "iphone6"
+        firstOnboard.index = 0
+        firstOnboard.typeIndex = 1
+
+        let secondOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
+        secondOnboard.titleString = "Double tap anywhere to invert the colors"
+        secondOnboard.mainImageFile = "iphone6"
+        secondOnboard.index = 1
+        secondOnboard.typeIndex = 2
+
+        let thirdOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
+        thirdOnboard.titleString = "Pinch zoom to distort the text"
+        thirdOnboard.mainImageFile = "iphone6"
+        thirdOnboard.index = 2
+        thirdOnboard.typeIndex = 3
+
+
+        let forthOnboard:SDWOnboardContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SDWOnboardContentViewController") as! SDWOnboardContentViewController
+        forthOnboard.titleString = "Swipe up or down for extras"
+        forthOnboard.mainImageFile = "iphone6"
+        forthOnboard.index = 3
+        forthOnboard.typeIndex = 4
+
+
+
+        onboardingControllers = [firstOnboard,secondOnboard,thirdOnboard,forthOnboard ]
+
+        self.onboardPageViewController.setViewControllers([firstOnboard ], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+
+
+        self.onboardPageViewController.isIntroMode = false
         self.presentViewController(self.onboardPageViewController, animated: true, completion: nil)
     }
 
@@ -166,7 +210,7 @@ class SDWMainController: UIViewController, UIPageViewControllerDataSource, UIPag
 
             index += 1;
 
-            if index == 5 {
+            if index == onboardingControllers.count {
 
                 return nil
             }

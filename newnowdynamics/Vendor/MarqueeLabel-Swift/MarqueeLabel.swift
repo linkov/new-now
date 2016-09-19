@@ -10,7 +10,7 @@ import QuartzCore
 
 @IBDesignable
 
-public class MarqueeLabel: UILabel {
+public class MarqueeLabel: UILabel, CAAnimationDelegate {
 
     var calculatedDevider:CGFloat = 0
     var calculatedRect:CGRect = CGRectZero
@@ -179,7 +179,7 @@ public class MarqueeLabel: UILabel {
      The "home" location is the traditional location of `UILabel` text. This property essentially reflects if a scroll animation is underway.
      */
     public var awayFromHome: Bool {
-        if let presentationLayer = sublabel.layer.presentationLayer() as? CALayer {
+        if let presentationLayer = sublabel.layer.presentationLayer() {
             return !(presentationLayer.position.x == homeLabelFrame.origin.x)
         }
         
@@ -1045,7 +1045,7 @@ public class MarqueeLabel: UILabel {
             colorAnimation.toValue = adjustedColors
             colorAnimation.fillMode = kCAFillModeForwards
             colorAnimation.removedOnCompletion = false
-            colorAnimation.delegate = self
+//            colorAnimation.delegate = self
             gradientMask.addAnimation(colorAnimation, forKey: "setupFade")
         } else {
             gradientMask.colors = adjustedColors
@@ -1113,7 +1113,7 @@ public class MarqueeLabel: UILabel {
         
         // Define values
         // Get current layer values
-        let mask = maskLayer?.presentationLayer() as? CAGradientLayer
+        let mask = maskLayer?.presentationLayer()
         let currentValues = mask?.colors as? [CGColorRef]
         
         switch (type) {
@@ -1254,7 +1254,7 @@ public class MarqueeLabel: UILabel {
         }
     }
     
-    override public func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+    public func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         if let setupAnim = anim as? GradientSetupAnimation {
             if let finalColors = setupAnim.toValue as? [CGColorRef] {
                 maskLayer?.colors = finalColors

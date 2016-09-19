@@ -136,7 +136,7 @@ class SDWAboutViewController: UIViewController, SDWPageable {
 
     @IBAction func alxDidTap(sender: AnyObject) {
 
-        let requestUrl = NSURL(string: "http://werk.studio")
+        let requestUrl = NSURL(string: "https://www.linkedin.com/company/15179027")
         UIApplication.sharedApplication().openURL(requestUrl!)
 
     }
@@ -170,7 +170,7 @@ class SDWAboutViewController: UIViewController, SDWPageable {
 
     @IBAction func openOnboardDidTap(sender: AnyObject) {
 //
-      self.delegate?.openOnboard()
+      self.delegate?.openInstuctions()
     }
     /*
     // MARK: - Navigation

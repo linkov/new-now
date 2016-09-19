@@ -22,6 +22,7 @@ class SDWOnboardContentViewController: UIViewController,SDWPageable {
 
 
     var index:NSInteger = 0
+    var typeIndex:NSInteger = 0
 
     var mainImageFile:String!
     var titleString:String!
@@ -31,37 +32,50 @@ class SDWOnboardContentViewController: UIViewController,SDWPageable {
     let leftArrowImageView = UIImageView.init(image:UIImage.init(named: "arrow_left"))
     let downArrowImageView = UIImageView.init(image:UIImage.init(named: "arrow_down"))
 
-    func printFonts() {
-        let fontFamilyNames = UIFont.familyNames()
-        for familyName in fontFamilyNames {
-            print("------------------------------")
-            print("Font Family Name = [\(familyName)]")
-            let names = UIFont.fontNamesForFamilyName(familyName )
-            print("Font Names = [\(names)]")
-        }
+//    func printFonts() {
+//        let fontFamilyNames = UIFont.familyNames()
+//        for familyName in fontFamilyNames {
+//            print("------------------------------")
+//            print("Font Family Name = [\(familyName)]")
+//            let names = UIFont.fontNamesForFamilyName(familyName )
+//            print("Font Names = [\(names)]")
+//        }
+//    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+
         self.alphaOutAllAnimatedViews()
 
-        if (self.index != 0) {
+        if (self.typeIndex != 0) {
             self.revealAnimatedViews()
         }
 
 
+    }
+    
+
+    override func viewDidLayoutSubviews() {
+
+        super.viewDidLayoutSubviews()
+self.setupAnimatedViews()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
 
-//        printFonts()
 
 
-        self.setupAnimatedViews()
-
+        self.view.addSubview(leftArrowImageView)
+        self.view.addSubview(rightArrowImageView)
+        self.view.addSubview(downArrowImageView)
 
 
 
@@ -154,14 +168,14 @@ class SDWOnboardContentViewController: UIViewController,SDWPageable {
     func revealAnimatedViews() {
 
 
-        if (self.index != 3) {
+        if (self.typeIndex != 3) {
             mainGestureCircleDuplicate.hidden = true
         } else {
             mainGestureCircleDuplicate.hidden = false
         }
 
 
-        if (self.index == 1) {
+        if (self.typeIndex == 1) {
             UIView.animateWithDuration(1.3) {
 
                 self.mainGestureCircle.alpha = 1.0
@@ -170,7 +184,7 @@ class SDWOnboardContentViewController: UIViewController,SDWPageable {
             self.showSwipeLeftRight()
         }
 
-        if (self.index == 2) {
+        if (self.typeIndex == 2) {
             UIView.animateWithDuration(1.3) {
 
                 self.mainGestureCircle.alpha = 1.0
@@ -178,11 +192,11 @@ class SDWOnboardContentViewController: UIViewController,SDWPageable {
             self.showDoubleTap()
         }
 
-        if (self.index == 3) {
+        if (self.typeIndex == 3) {
             self.showPinchZoom()
         }
 
-        if (self.index == 4) {
+        if (self.typeIndex == 4) {
             self.showSwipeDown()
         }
 
@@ -221,7 +235,6 @@ class SDWOnboardContentViewController: UIViewController,SDWPageable {
     }
 
     func showSwipeLeftRight() {
-
 
 
 
@@ -340,21 +353,19 @@ class SDWOnboardContentViewController: UIViewController,SDWPageable {
 
     func setupAnimatedViews() {
 
-        if (self.index == 0) {
+        if (self.typeIndex == 0) {
             mainGestureCircle.hidden = true
         } else {
             mainGestureCircle.hidden = false
 
-            self.view.addSubview(leftArrowImageView)
-            self.view.addSubview(rightArrowImageView)
-            self.view.addSubview(downArrowImageView)
+
 
 
         }
 
 
 
-        if (self.index == 2) {
+        if (self.typeIndex == 2) {
             doubleCircle.hidden = false
         } else {
             doubleCircle.hidden = true

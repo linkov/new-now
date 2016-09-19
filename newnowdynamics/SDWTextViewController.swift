@@ -55,6 +55,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
         super.viewWillAppear(animated)
 //        self.mainTextLabel.unpauseLabel()
 
+         mainTextLabel.alpha = 0.0
 
         if (self.mainTextLabel.type == .ContinuousReverse) {
             self.mainTextLabel.type = .ContinuousReverse
@@ -71,8 +72,14 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        UIView.animateWithDuration(0.6) { 
+        UIView.animateWithDuration(1.3, delay: 0.5, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
 
+            self.mainTextLabel.alpha = 1.0
+
+            }, completion: nil)
+
+        UIView.animateWithDuration(0.6) {
+            
             self.introImageView.alpha = 0.0
         }
     }
@@ -80,7 +87,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.introImageView.alpha = 1.0
+        self.introImageView.alpha = 0.0
 
 
 //        self.mainTextLabel.text = self.baseText
