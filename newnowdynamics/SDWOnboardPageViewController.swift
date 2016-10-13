@@ -22,24 +22,6 @@ class SDWOnboardPageViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        //add the observer
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: #selector(self.orientationChanged(_:)),
-            name: UIDeviceOrientationDidChangeNotification,
-            object: nil)
-
-//        for gr:UIGestureRecognizer in self.gestureRecognizers {
-//
-//            gr.delegate = self;
-//        }
-
-//        self.gestureRecognizers
-
-//        for ( gR:UIGestureRecognizer,, in self.view.gestureRecognizers) {
-//            gR.delegate = self;
-//        }
 
         let dotView:UIView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: 6))
         dotView.layer.cornerRadius = 3
@@ -183,6 +165,7 @@ class SDWOnboardPageViewController: UIPageViewController {
                         (value: Bool) in
 
                         self.canHideRotateView = true
+                        self.revealUI()
                         
                 })
 
@@ -201,29 +184,13 @@ class SDWOnboardPageViewController: UIPageViewController {
     
 
 
-//    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
-//        return true
-//    }
 
-
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        print("SCREEN RESOLUTION")
-    }
-    var screenWidth:CGFloat=0
-    var screenHeight:CGFloat=0
-    func getScreenSize(){
-        screenWidth=UIScreen.mainScreen().bounds.width
-        screenHeight=UIScreen.mainScreen().bounds.height
-        print("SCREEN RESOLUTION: "+screenWidth.description+" x "+screenHeight.description)
-    }
-
-    func orientationChanged(notification : NSNotification) {
-            getScreenSize()
+    func revealUI() {
 
         if (canHideRotateView) {
 
             canHideRotateView = false
-            UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+            UIView.animateWithDuration(0.4, delay: 2.5, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
 
                 self.rotateLabel.alpha = 0.0
 

@@ -12,6 +12,9 @@ class SDWAboutViewController: UIViewController, SDWPageable {
 
     var delegate:SDWMainController?
 
+    @IBOutlet var originalWorkButton: UIButton!
+    @IBOutlet var originalWorkUnderline: UIView!
+    @IBOutlet var slash: UILabel!
     @IBOutlet var openOnboardButton: UIButton!
     @IBOutlet var shareUnderlineView: UIView!
     @IBOutlet var openOnboardUnderlineView: UIView!
@@ -46,16 +49,19 @@ class SDWAboutViewController: UIViewController, SDWPageable {
             letcusButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             kraftButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             shareButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            originalWorkButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             openOnboardButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
 
             codedLabel.textColor = UIColor.whiteColor()
             designedLabel.textColor = UIColor.whiteColor()
+            slash.textColor = UIColor.whiteColor()
 
             self.leftText.textColor = UIColor.whiteColor()
 
             kraftUnderlineView.backgroundColor = UIColor.whiteColor()
             letcusUnderlineView.backgroundColor = UIColor.whiteColor()
             alxUnderlineView.backgroundColor = UIColor.whiteColor()
+            originalWorkUnderline.backgroundColor = UIColor.whiteColor()
 
             shareUnderlineView.backgroundColor = UIColor.whiteColor()
             openOnboardUnderlineView.backgroundColor =  UIColor.whiteColor()
@@ -70,12 +76,14 @@ class SDWAboutViewController: UIViewController, SDWPageable {
             letcusButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
             kraftButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
             openOnboardButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            originalWorkButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
 
 
             kraftUnderlineView.backgroundColor = UIColor.blackColor()
             letcusUnderlineView.backgroundColor = UIColor.blackColor()
             alxUnderlineView.backgroundColor = UIColor.blackColor()
             shareUnderlineView.backgroundColor = UIColor.blackColor()
+            originalWorkUnderline.backgroundColor = UIColor.blackColor()
             openOnboardUnderlineView.backgroundColor =  UIColor.blackColor()
 
 
@@ -83,16 +91,16 @@ class SDWAboutViewController: UIViewController, SDWPageable {
 
             codedLabel.textColor = UIColor.blackColor()
             designedLabel.textColor = UIColor.blackColor()
-
-
             self.leftText.textColor = UIColor.blackColor()
+            slash.textColor = UIColor.blackColor()
+
 
             self.view.backgroundColor = UIColor.whiteColor()
 
         }
 
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 8
+        paragraphStyle.lineSpacing = 10
         paragraphStyle.alignment = NSTextAlignment.Justified
 
 
@@ -152,6 +160,11 @@ class SDWAboutViewController: UIViewController, SDWPageable {
     @IBAction func kraftDidTap(sender: AnyObject) {
 
         let requestUrl = NSURL(string: "http://egorkraft.co.uk/")
+        UIApplication.sharedApplication().openURL(requestUrl!)
+    }
+    @IBAction func originalWorkDidTap(sender: AnyObject) {
+
+        let requestUrl = NSURL(string: "https://vimeo.com/115720376")
         UIApplication.sharedApplication().openURL(requestUrl!)
     }
 

@@ -40,28 +40,36 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
     var panGestureBeganTime:NSTimeInterval = 0
     var previousScrollSpeed:CGFloat = 0
     let index:NSInteger = 1
-    let baseText:String = " THIS NEW MOMENT HAS ALREADY BECOME THE PAST – "
+    let baseText:String = "THIS NEW MOMENT HAS ALREADY BECOME THE PAST – "
     @IBOutlet var mainTextLabel: MarqueeLabel!
 
 
 
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-//        self.updateToSpeed(0.0, shouldRestart: false)
+        self.updateToSpeed(0.0, shouldRestart: false)
+        self.mainTextLabel.lastXoffset = 0;
 //        self.mainTextLabel.pauseLabel()
+        
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 //        self.mainTextLabel.unpauseLabel()
 
+        if (lastSpeedBeforeDirectionChange != 0.0) {
+            self.updateToSpeed(lastSpeedBeforeDirectionChange, shouldRestart: false)
+
+        }
          mainTextLabel.alpha = 0.0
+
 
         if (self.mainTextLabel.type == .ContinuousReverse) {
             self.mainTextLabel.type = .ContinuousReverse
         } else {
             self.mainTextLabel.type = .Continuous
         }
+
 
 
 
@@ -87,6 +95,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.mainTextLabel.lastXoffset = 600;
         self.introImageView.alpha = 0.0
 
 
@@ -126,6 +135,7 @@ class SDWTextViewController: UIViewController, SDWPageable,UIScrollViewDelegate 
 
         self.view.backgroundColor = UIColor.blackColor()
         self.mainTextLabel.textColor = UIColor.whiteColor()
+        self.lastSpeedBeforeDirectionChange = 30
         self.updateToSpeed(30,shouldRestart:  true)
 
 

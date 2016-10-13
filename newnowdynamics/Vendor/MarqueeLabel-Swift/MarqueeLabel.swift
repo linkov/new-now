@@ -59,8 +59,8 @@ public class MarqueeLabel: UILabel, CAAnimationDelegate {
             if ((sublabel.layer.presentationLayer()?.frame) != nil) {
                 lastXoffset = (sublabel.layer.presentationLayer()?.frame.origin.x)!
 
-//                print("Offset before switch")
-//                print(lastXoffset)
+                print("Offset before switch")
+                print(lastXoffset)
             }
 
 
@@ -602,13 +602,17 @@ public class MarqueeLabel: UILabel, CAAnimationDelegate {
             if (type == .Continuous) {
                 homeLabelFrame = CGRectIntegral(CGRectMake(leadingBuffer, 0.0, expectedLabelSize.width, bounds.size.height))
 
+                let totalWidth =  (bounds.size.width - (expectedLabelSize.width + leadingBuffer))
+
+
+//                calculatedDevider = ( abs(lastXoffset) / totalWidth )
 
 
                 var lastOffsetFinal:CGFloat = 0.0
 
                 if (lastXoffset > 0) {
 
-                    let totalWidth =  (bounds.size.width - (expectedLabelSize.width + leadingBuffer))
+
                     lastOffsetFinal = -( abs(totalWidth) - abs(lastXoffset) + bounds.size.width )
 
                 } else {
@@ -630,8 +634,8 @@ public class MarqueeLabel: UILabel, CAAnimationDelegate {
 
             } else { // .ContinuousReverse
 
-//                print("call ContinuousReverse / Swipe to right")
-//                print(lastXoffset)
+                print("call ContinuousReverse / Swipe to right")
+                print(lastXoffset)
 
                 homeLabelFrame = CGRectIntegral(CGRectMake(bounds.size.width - (expectedLabelSize.width + leadingBuffer), 0.0, expectedLabelSize.width, bounds.size.height))
                 awayOffset = (homeLabelFrame.size.width + minTrailing)
@@ -648,7 +652,8 @@ public class MarqueeLabel: UILabel, CAAnimationDelegate {
 
                     if (abs(lastXoffset) <= (expectedLabelSize.width) && abs(lastXoffset) > (expectedLabelSize.width - bounds.size.width )) {
 
-                        realOffset = abs(lastXoffset) - abs(expectedLabelSize.width - bounds.size.width )
+                        //realOffset = abs(lastXoffset) - abs(expectedLabelSize.width - bounds.size.width )
+                        realOffset = -( (bounds.size.width - (expectedLabelSize.width + leadingBuffer)) +  abs(lastXoffset) - bounds.size.width  )
 
                     } else {
                         realOffset = -abs(lastXoffset)
@@ -658,18 +663,19 @@ public class MarqueeLabel: UILabel, CAAnimationDelegate {
                     calculatedDevider = 1
                 } else {
 
-                    realOffset = ( (bounds.size.width - (expectedLabelSize.width + leadingBuffer)) + ( abs(lastXoffset) /  abs(calculatedDevider) ) )
+                    realOffset = -( (bounds.size.width - (expectedLabelSize.width + leadingBuffer)) +  abs(lastXoffset) - bounds.size.width  )
+
                 }
 
 //                print("calculatedDevider")
 //                print(calculatedDevider)
 //
-//                print("realOffset")
-//                print(realOffset)
+                print("realOffset")
+                print(realOffset)
 
                 calculatedRect = CGRectMake( realOffset  , 0.0, expectedLabelSize.width, bounds.size.height)
-//                print("calculatedRect")
-//                print(calculatedRect)
+                print("calculatedRect")
+                print(calculatedRect)
 
 //                 calculatedRect = CGRectMake( -abs(lastXoffset), 0.0, expectedLabelSize.width, bounds.size.height)
                 homeLabelFrame = CGRectIntegral(calculatedRect)
